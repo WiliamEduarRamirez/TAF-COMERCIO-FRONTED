@@ -57,7 +57,7 @@ import { Vue } from 'vue-property-decorator';
 
 @Component
 export default class AdminLayout extends Vue {
-  drawer = false;
+  drawer = true;
   items = [
     {
       text: 'Mapa',
