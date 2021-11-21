@@ -1,12 +1,11 @@
 <template>
-  <v-app>
-    <router-view />
-  </v-app>
+  <div>Desde dashboard admin</div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-
 @Component
-export default class App extends Vue {}
+export default class DashboardComponent extends Vue {}
 </script>
+
+<style scoped></style>
