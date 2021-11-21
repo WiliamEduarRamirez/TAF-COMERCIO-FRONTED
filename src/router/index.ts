@@ -13,10 +13,20 @@ const routes: Array<RouteConfig> = [
     children: [...adminRouters],
   },
   {
+    path: '/admin/login',
+    name: 'login-admin',
+    component: () => import('@/views/admin/Login.vue'),
+  },
+  {
     path: '/',
     name: '',
     component: () => import('@/layouts/customer/CustomerLayout.vue'),
     children: [...customerRouters],
+  },
+  {
+    path: '/login',
+    name: 'login-customer',
+    component: () => import('@/views/customer/Login.vue'),
   },
 ];
 
