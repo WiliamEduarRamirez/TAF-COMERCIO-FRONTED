@@ -2,6 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import sleep from '@/functions/sleep';
 import { BASE_URL } from '@/constants/app-constants';
 import store from '@/store/index';
+import { PaginatedResult } from '@/models/pagination';
 
 axios.defaults.baseURL = BASE_URL;
 
@@ -13,6 +14,11 @@ axios.interceptors.request.use((config) => {
 
 axios.interceptors.response.use(async (response) => {
   await sleep(1000);
+  const pagination = response.headers['pagination'];
+  if (pagination) {
+    response.data = new PaginatedResult(response.data, JSON.parse(pagination));
+    return response as AxiosResponse<PaginatedResult<any>>;
+  }
   return response;
 });
 

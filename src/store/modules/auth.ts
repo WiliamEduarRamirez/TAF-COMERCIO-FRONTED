@@ -1,6 +1,6 @@
 import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators';
 import { User, UserFormValues } from '@/models/user';
-import accountsServices from '@/services/accounts-services';
+import accountsServices from '@/services/accounts.services';
 import router from '@/router/index';
 
 @Module({ namespaced: true })
@@ -23,6 +23,11 @@ class Auth extends VuexModule {
 
   @Mutation
   public setToken(token: string | null): void {
+    if (token) {
+      window.localStorage.setItem('jwt', token);
+    } else {
+      window.localStorage.removeItem('jwt');
+    }
     this.token = token;
   }
 
