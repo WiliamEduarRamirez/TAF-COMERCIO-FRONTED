@@ -11,5 +11,15 @@ const adminRouters: Array<RouteConfig> = [
       /* authorize: [role.medic, role.supervisor],*/
     },
   },
+  {
+    path: 'products',
+    component: () => import('@/modules/admin/products/ProductsList.vue'),
+    name: 'products',
+    meta: {
+      nameComponent: 'Productos',
+      requiresAuth: true,
+      /* authorize: [role.medic, role.supervisor],*/
+    },
+  },
 ];
 export default adminRouters;
