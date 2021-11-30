@@ -41,6 +41,7 @@ class Auth extends VuexModule {
     this.user = user;
   }
 
+
   @Action
   async login(creds: UserFormValues): Promise<void> {
     this.context.commit('setInitialLoading', true);
