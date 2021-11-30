@@ -2,7 +2,7 @@ import { RouteConfig } from 'vue-router';
 
 const adminRouters: Array<RouteConfig> = [
   {
-    path: '',
+    path: 'dashboard',
     component: () => import('@/modules/admin/dashboard/DashboardComponent.vue'),
     name: 'dashboard',
     meta: {

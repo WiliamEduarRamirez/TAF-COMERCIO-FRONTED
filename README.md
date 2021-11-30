@@ -1,4 +1,4 @@
-# pokemon-app
+# ECOMMERCE
 
 ## Project setup
 ```

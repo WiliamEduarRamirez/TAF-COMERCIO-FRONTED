@@ -1,8 +1,16 @@
 import axios, { AxiosResponse } from 'axios';
 import sleep from '@/functions/sleep';
 import { BASE_URL } from '@/constants/app-constants';
+import store from '@/store/index';
 
 axios.defaults.baseURL = BASE_URL;
+
+axios.interceptors.request.use((config) => {
+  const token = store.getters['auth/getToken'];
+  if (token) config.headers!.Authorization = `Bearer ${token}`;
+  return config;
+});
+
 axios.interceptors.response.use(async (response) => {
   await sleep(1000);
   return response;
