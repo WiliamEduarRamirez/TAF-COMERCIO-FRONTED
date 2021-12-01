@@ -3,7 +3,7 @@ import { RouteConfig } from 'vue-router';
 const adminRouters: Array<RouteConfig> = [
   {
     path: 'dashboard',
-    component: () => import('@/modules/admin/dashboard/DashboardComponent.vue'),
+    component: () => import('@/views/admin/Dashboard.vue'),
     name: 'dashboard',
     meta: {
       nameComponent: 'Dashboard',
@@ -13,7 +13,7 @@ const adminRouters: Array<RouteConfig> = [
   },
   {
     path: 'products',
-    component: () => import('@/modules/admin/products/ProductsList.vue'),
+    component: () => import('@/views/admin/Product.vue'),
     name: 'products',
     meta: {
       nameComponent: 'Productos',
