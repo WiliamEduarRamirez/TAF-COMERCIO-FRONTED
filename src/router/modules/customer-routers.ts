@@ -8,7 +8,7 @@ const customerRouters: Array<RouteConfig> = [
     meta: {
       nameComponent: 'Home',
       requiresAuth: false,
-      /* authorize: [role.medic, role.supervisor],*/
+      authorize: [],
     },
   },
 ];

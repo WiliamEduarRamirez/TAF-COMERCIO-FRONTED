@@ -3,10 +3,10 @@ import { Pagination, PagingParams } from '@/models/pagination';
 import productsServices from '@/services/products.services';
 
 @Module({ namespaced: true })
-class Product extends VuexModule {
+class ProductModule extends VuexModule {
   pagination: Pagination | null = null;
   pagingParams = new PagingParams(1, 10);
-  products: Product[] = [];
+  products: ProductModule[] = [];
   initialLoading = false;
 
   get axiosParams(): URLSearchParams {
@@ -20,7 +20,7 @@ class Product extends VuexModule {
     return this.initialLoading;
   }
 
-  get getProducts(): Product[] {
+  get getProducts(): ProductModule[] {
     return this.products;
   }
 
@@ -29,7 +29,7 @@ class Product extends VuexModule {
   }
 
   @Mutation
-  public setProducts(products: Product[]): void {
+  public setProducts(products: ProductModule[]): void {
     this.products = products;
   }
 
@@ -57,4 +57,4 @@ class Product extends VuexModule {
     }
   }
 }
-export default Product;
+export default ProductModule;

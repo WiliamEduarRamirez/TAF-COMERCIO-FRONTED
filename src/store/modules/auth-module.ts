@@ -4,7 +4,7 @@ import accountsServices from '@/services/accounts.services';
 import router from '@/router/index';
 
 @Module({ namespaced: true })
-class Auth extends VuexModule {
+class AuthModule extends VuexModule {
   token: string | null = window.localStorage.getItem('jwt');
   user: User | null = null;
   initialLoading = false;
@@ -41,7 +41,6 @@ class Auth extends VuexModule {
     this.user = user;
   }
 
-
   @Action
   async login(creds: UserFormValues): Promise<void> {
     this.context.commit('setInitialLoading', true);
@@ -49,7 +48,7 @@ class Auth extends VuexModule {
       const user = await accountsServices.login(creds);
       this.context.commit('setUser', user);
       this.context.commit('setToken', user.token);
-      await router.push({ name: 'dashboard' });
+      await router.push({ name: 'dashboard-admin' });
       // eslint-disable-next-line no-useless-catch
     } catch (e) {
       throw e;
@@ -58,4 +57,4 @@ class Auth extends VuexModule {
     }
   }
 }
-export default Auth;
+export default AuthModule;

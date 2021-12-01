@@ -2,6 +2,7 @@ export interface User {
   username: string;
   displayName: string;
   token: string;
+  roles: string[];
 }
 
 export interface UserFormValues {
@@ -10,4 +11,3 @@ export interface UserFormValues {
   displayName?: string;
   username?: string;
 }
-

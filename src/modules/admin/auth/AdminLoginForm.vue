@@ -104,7 +104,7 @@ export default class AdminLoginForm extends Vue {
   }
 
   @auth.Action
-  login!: (creds: UserFormValues) => void;
+  login!: (creds: UserFormValues) => Promise<void>;
 
   @auth.Getter
   getInitialLoading!: boolean;

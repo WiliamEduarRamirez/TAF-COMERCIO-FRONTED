@@ -1,14 +1,15 @@
 import { RouteConfig } from 'vue-router';
+import { ROLE_ADMIN } from '@/helpers/roles';
 
 const adminRouters: Array<RouteConfig> = [
   {
     path: 'dashboard',
     component: () => import('@/views/admin/Dashboard.vue'),
-    name: 'dashboard',
+    name: 'dashboard-admin',
     meta: {
-      nameComponent: 'Dashboard',
+      nameComponent: 'dashboard-admin',
       requiresAuth: true,
-      /* authorize: [role.medic, role.supervisor],*/
+      authorize: [ROLE_ADMIN],
     },
   },
   {
@@ -18,7 +19,7 @@ const adminRouters: Array<RouteConfig> = [
     meta: {
       nameComponent: 'Productos',
       requiresAuth: true,
-      /* authorize: [role.medic, role.supervisor],*/
+      authorize: [ROLE_ADMIN],
     },
   },
 ];

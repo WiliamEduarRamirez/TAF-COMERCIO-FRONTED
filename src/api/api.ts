@@ -1,8 +1,16 @@
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 import sleep from '@/functions/sleep';
 import { BASE_URL } from '@/constants/app-constants';
 import store from '@/store/index';
 import { PaginatedResult } from '@/models/pagination';
+
+/*Start - Config vue-toastification*/
+import Toast from 'vue-toastification';
+import 'vue-toastification/dist/index.css';
+import Vue from 'vue';
+/*End - Config vue-toastification*/
+
+const toast = Vue.use(Toast).$toast;
 
 axios.defaults.baseURL = BASE_URL;
 
@@ -12,15 +20,38 @@ axios.interceptors.request.use((config) => {
   return config;
 });
 
-axios.interceptors.response.use(async (response) => {
-  await sleep(1000);
-  const pagination = response.headers['pagination'];
-  if (pagination) {
-    response.data = new PaginatedResult(response.data, JSON.parse(pagination));
-    return response as AxiosResponse<PaginatedResult<any>>;
+axios.interceptors.response.use(
+  async (response) => {
+    await sleep(2000);
+    const pagination = response.headers['pagination'];
+    if (pagination) {
+      response.data = new PaginatedResult(response.data, JSON.parse(pagination));
+      return response as AxiosResponse<PaginatedResult<any>>;
+    }
+    return response;
+  },
+  (error: AxiosError) => {
+    if (error.response) {
+      const { status } = error.response;
+      switch (status) {
+        case 400:
+          break;
+        case 401:
+          break;
+        case 404:
+          break;
+        case 500:
+          break;
+      }
+    }
+    switch (error.message) {
+      case 'Network Error':
+        toast.error('Verifique su conexión a internet');
+        break;
+    }
+    return Promise.reject(error);
   }
-  return response;
-});
+);
 
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
