@@ -6,15 +6,18 @@ import vuetify from './plugins/vuetify';
 
 Vue.config.productionTip = false;
 
-/*Start - Config vue-toastification*/
 import Toast from 'vue-toastification';
+// Import the CSS or use your own!
 import 'vue-toastification/dist/index.css';
-/*End - Config vue-toastification*/
+
+const options = {
+  // You can set your default options here
+};
+Vue.use(Toast, options);
 
 import mixinFormat from '@/mixins/formats';
 
 Vue.mixin(mixinFormat);
-Vue.use(Toast);
 
 new Vue({
   router,

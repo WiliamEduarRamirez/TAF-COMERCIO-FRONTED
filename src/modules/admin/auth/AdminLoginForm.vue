@@ -75,6 +75,7 @@ import { Component, Vue } from 'vue-property-decorator';
 import { REGEX_VALID_EMAIL } from '@/constants/validations-config';
 import { UserFormValues } from '@/models/user';
 import { namespace } from 'vuex-class';
+import { AxiosError } from 'axios';
 const auth = namespace('auth');
 
 const valueForm: UserFormValues = {
@@ -84,7 +85,7 @@ const valueForm: UserFormValues = {
 
 @Component
 export default class AdminLoginForm extends Vue {
-  rememberAccount = !!localStorage.getItem('remember-account');
+  rememberAccount = !!window.localStorage.getItem('remember-account');
   valid = true;
   rules = {
     required: (v: string): any => !!v || 'La contraseña es requerida',
@@ -98,7 +99,7 @@ export default class AdminLoginForm extends Vue {
   loading = false;
 
   created(): void {
-    const email = localStorage.getItem('remember-account');
+    const email = window.localStorage.getItem('remember-account');
     this.form = { ...valueForm };
     this.form.email = email || this.form.email;
   }
@@ -109,10 +110,26 @@ export default class AdminLoginForm extends Vue {
   @auth.Getter
   getInitialLoading!: boolean;
 
-  signIn(): void {
+  async signIn(): Promise<void> {
     const form = (this.$refs.form as Vue & { validate: () => boolean }).validate();
     if (!form) return;
-    this.login(this.form);
+    if (this.rememberAccount) {
+      window.localStorage.setItem('remember-account', this.form.email);
+    } else {
+      window.localStorage.removeItem('remember-account');
+    }
+    await this.login(this.form).catch((err: AxiosError) => {
+      const defaultError = 'Ocurrio un error, intente nuevamente';
+      if (!err.response) {
+        this.$toast.error(defaultError);
+        return;
+      }
+      switch (err.response?.status) {
+        case 401:
+          this.$toast.error(err.response?.data?.message || defaultError);
+          break;
+      }
+    });
   }
 }
 </script>

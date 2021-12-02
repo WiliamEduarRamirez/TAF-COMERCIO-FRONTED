@@ -41,20 +41,26 @@ class AuthModule extends VuexModule {
     this.user = user;
   }
 
-  @Action
+  @Action({ rawError: true })
   async login(creds: UserFormValues): Promise<void> {
     this.context.commit('setInitialLoading', true);
+
     try {
       const user = await accountsServices.login(creds);
       this.context.commit('setUser', user);
       this.context.commit('setToken', user.token);
       await router.push({ name: 'dashboard-admin' });
-      // eslint-disable-next-line no-useless-catch
-    } catch (e) {
-      throw e;
-    } finally {
       this.context.commit('setInitialLoading', false);
+    } catch (e) {
+      this.context.commit('setInitialLoading', false);
+      throw e;
     }
+  }
+
+  @Action
+  logout(): void {
+    this.context.commit('setToken', null);
+    router.push({ name: 'login-admin' });
   }
 }
 export default AuthModule;
