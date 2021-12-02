@@ -5,7 +5,7 @@ import productsServices from '@/services/products.services';
 @Module({ namespaced: true })
 class ProductModule extends VuexModule {
   pagination: Pagination | null = null;
-  pagingParams = new PagingParams(1, 10);
+  pagingParams = new PagingParams(1, 8);
   products: ProductModule[] = [];
   initialLoading = false;
 
