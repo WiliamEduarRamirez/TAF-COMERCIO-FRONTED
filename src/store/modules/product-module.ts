@@ -8,6 +8,7 @@ class ProductModule extends VuexModule {
   pagingParams = new PagingParams(1, 8);
   products: ProductModule[] = [];
   initialLoading = false;
+  modalAddPhoto: any = null;
 
   get axiosParams(): URLSearchParams {
     const params = new URLSearchParams();
@@ -18,6 +19,10 @@ class ProductModule extends VuexModule {
 
   get getInitialLoading(): boolean {
     return this.initialLoading;
+  }
+
+  get modalAddPhotoRef(): any {
+    return this.modalAddPhoto;
   }
 
   get getProducts(): ProductModule[] {
@@ -31,6 +36,12 @@ class ProductModule extends VuexModule {
   @Mutation
   public setProducts(products: ProductModule[]): void {
     this.products = products;
+  }
+
+  @Mutation
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  setModalAddPhotoRef(modalRef: any): void {
+    this.modalAddPhoto = modalRef;
   }
 
   @Mutation

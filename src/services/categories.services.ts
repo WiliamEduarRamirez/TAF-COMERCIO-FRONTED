@@ -2,7 +2,7 @@ import { Category } from '@/models/product';
 import request from '@/api/api';
 
 const categoriesServices = {
-  list: (): Promise<Category[]> => request.get<Category[]>('/categories'),
-
+  list: (typeId: string): Promise<Category[]> =>
+    request.get<Category[]>(`/categories/type/${typeId}`),
 };
 export default categoriesServices;

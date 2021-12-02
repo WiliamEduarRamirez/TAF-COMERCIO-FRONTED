@@ -28,6 +28,7 @@ import { Component, Emit, Prop, Vue } from 'vue-property-decorator';
 @Component
 export default class CustomModal extends Vue {
   dialog = false;
+
   @Prop({ required: true }) readonly title!: string;
   @Prop({ required: true }) readonly message!: string;
 

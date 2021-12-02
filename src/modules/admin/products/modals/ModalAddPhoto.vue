@@ -12,7 +12,11 @@
           <v-container>
             <v-form ref="form" v-model="valid" lazy-validation>
               <v-row>
-                <custom-dropzone @input-file="inputFile"></custom-dropzone>
+                <custom-dropzone
+                  ref="custom-dropzone-product"
+                  @remove="deleteFile"
+                  @input-file="inputFile"
+                ></custom-dropzone>
               </v-row>
             </v-form>
           </v-container>
@@ -20,15 +24,15 @@
         <v-divider></v-divider>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn :disabled="loading" @click="close"> Cancelar </v-btn>
+          <v-btn :disabled="loading" color="error" @click="close"> Cancelar </v-btn>
           <v-btn
             @click="uploadPhoto"
             class="ma-2"
-            :disabled="!valid"
+            :disabled="!file"
             :loading="loading"
-            color="primary"
+            color="success"
           >
-            Aceptar
+            Agregar
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -66,14 +70,21 @@ export default class ProductsList extends Vue {
     this.file = file;
   }
 
+  deleteFile(): void {
+    this.file = null;
+  }
+
   async uploadPhoto(): Promise<void> {
     this.loading = true;
     try {
       if (this.file && this.product) {
-        const photo = await photosServices.add(this.file, this.product.id);
-        console.log(photo);
+        const dropzone = this.$refs['custom-dropzone-product'] as Vue & {
+          resetValues: () => void;
+        };
+        await photosServices.add(this.file, this.product.id);
         this.$toast.success('La foto se agrego correctamente');
         this.close();
+        dropzone.resetValues();
       }
     } catch (e) {
       console.log(e);

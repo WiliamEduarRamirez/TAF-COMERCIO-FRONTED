@@ -8,7 +8,9 @@
       title="Agregar imagen"
     ></custom-modal>
     <v-col class="d-flex justify-end" cols="12">
-      <v-btn @click="openModalFormProduct" color="primary" class="mr-3"> Agregar Producto</v-btn>
+      <v-btn @click="openModalFormProduct" color="success" small class="mr-3">
+        Agregar Producto
+      </v-btn>
     </v-col>
   </v-row>
 </template>
@@ -24,22 +26,21 @@ const product = namespace('product');
   components: { CustomModal, ModalFormProduct },
 })
 export default class ProductHeader extends Vue {
-  productId: string | null = null;
+  product: Product | null = null;
 
   /*  @Emit('product-added-successful')
   productAddedSuccessful(): string | null {
-    return this.productId;
+    return this.product;
   }*/
 
   @product.Action
   listProducts!: () => Promise<void>;
-  async created(): Promise<void> {
-    await this.listProducts();
-  }
+
+  @product.Getter
+  modalAddPhotoRef!: any;
 
   productAddedSuccessful(): void {
-    console.log('entra aqui');
-    console.log(this.productId);
+    this.modalAddPhotoRef.open(this.product);
   }
 
   openModalFormProduct(product: Product | null): void {
@@ -49,8 +50,8 @@ export default class ProductHeader extends Vue {
     modal.open(product);
   }
 
-  successfulAdd(productId: string): void {
-    this.productId = productId;
+  successfulAdd(product: Product): void {
+    this.product = product;
     this.listProducts();
     const modal = this.$refs['custom-modal-successful'] as Vue & {
       open: () => void;

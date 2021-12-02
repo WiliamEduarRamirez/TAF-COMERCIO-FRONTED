@@ -49,6 +49,11 @@
         <div class="text-center" style="margin-top: 220px" v-else>
           <custom-progress-circular></custom-progress-circular>
         </div>
+        <custom-message
+          style="margin-top: -250px"
+          v-if="getProducts.length === 0 && !getInitialLoading"
+          message="No disponde de ningun producto en este momento"
+        ></custom-message>
       </template>
     </CustomBodyTable>
   </div>
@@ -61,9 +66,10 @@ import { Product } from '@/models/product';
 import { namespace } from 'vuex-class';
 import CustomProgressCircular from '@/common/custom-progress-circular/CustomProgressCircular.vue';
 import ModalAddPhoto from '@/modules/admin/products/modals/ModalAddPhoto.vue';
+import CustomMessage from '@/common/custom-messages/CustomMessage.vue';
 const product = namespace('product');
 @Component({
-  components: { ModalAddPhoto, CustomProgressCircular, CustomBodyTable },
+  components: { CustomMessage, ModalAddPhoto, CustomProgressCircular, CustomBodyTable },
 })
 export default class ProductsList extends Vue {
   @product.Getter
@@ -71,6 +77,14 @@ export default class ProductsList extends Vue {
 
   @product.Getter
   getProducts!: Product[];
+
+  @product.Mutation
+  setModalAddPhotoRef!: (modalRef: any) => void;
+
+  mounted(): void {
+    const modal = this.$refs['modal-add-photo'] as Vue & { open: (product: Product) => void };
+    this.setModalAddPhotoRef(modal);
+  }
 
   openModalAddPhoto(product: Product): void {
     const modal = this.$refs['modal-add-photo'] as Vue & { open: (product: Product) => void };

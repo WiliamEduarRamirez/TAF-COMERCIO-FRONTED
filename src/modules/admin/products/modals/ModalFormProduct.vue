@@ -67,6 +67,7 @@
               </v-col>
               <v-col cols="6">
                 <v-select
+                  @change="listCategories(productFormValues.typeId)"
                   :disabled="loadingTypes || loading"
                   :loading="loadingTypes"
                   v-model.trim="productFormValues.typeId"
@@ -78,7 +79,7 @@
               </v-col>
               <v-col cols="6">
                 <v-select
-                  :disabled="loadingCategories || loading"
+                  :disabled="loadingCategories || loading || productFormValues.typeId === ''"
                   :loading="loadingCategories"
                   v-model.trim="productFormValues.categoryId"
                   :items="categoriesItems"
@@ -137,14 +138,14 @@ export default class ProductsList extends Vue {
   productFormValues = new ProductFormValues();
 
   @Emit('successful')
-  successful(productId: string): string {
-    return productId;
+  successful(product: Product): Product {
+    return product;
   }
 
   open(product: Product | null): void {
     this.editMode = !!product;
     this.listTypes();
-    this.listCategories();
+    /* this.listCategories();*/
     this.dialog = true;
   }
   addProduct(): void {
@@ -154,15 +155,14 @@ export default class ProductsList extends Vue {
     productsServices.add(this.productFormValues).then((res) => {
       this.loading = false;
       this.$toast.success('Producto agregado correctamente');
-      /* this.resetForm();*/
-      this.successful(res.id);
+      this.successful(res);
       this.close();
     });
   }
-  listCategories(): void {
+  listCategories(typeId: string): void {
     this.loadingCategories = true;
     categoriesServices
-      .list()
+      .list(typeId)
       .then((res) => {
         this.categoriesItems = res.map((x) => ({ text: x.denomination, value: x.id }));
       })
