@@ -94,15 +94,15 @@
         <v-divider></v-divider>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn :disabled="loading" @click="close"> Cancelar </v-btn>
+          <v-btn color="error" :disabled="loading" @click="close"> Cancelar </v-btn>
           <v-btn
             @click="addProduct"
             class="ma-2"
             :disabled="!valid || loadingTypes || loadingCategories"
             :loading="loading"
-            color="primary"
+            color="success"
           >
-            Aceptar
+            Agregar
           </v-btn>
         </v-card-actions>
       </v-card>

@@ -36,9 +36,9 @@ export class ProductFormValues {
   code = '';
   denomination = '';
   description = '';
-  cost = 0;
-  price = 0;
-  stock = 0;
+  cost: number | null = null;
+  price: number | null = null;
+  stock: number | null = null;
   categoryId = '';
   typeId = '';
 
