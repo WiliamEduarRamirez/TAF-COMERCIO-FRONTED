@@ -24,6 +24,14 @@
       </v-list>
     </template>
     <v-divider></v-divider>
+    <div
+      v-if="!mini"
+      class="mt-4"
+      :style="{ height: '55px', color: $vuetify.theme.themes.light.primary }"
+    >
+      <h1 class="mt-2 text-center">Navegación</h1>
+    </div>
+    <v-divider></v-divider>
     <template>
       <v-list rounded>
         <v-list-item-group color="primary">

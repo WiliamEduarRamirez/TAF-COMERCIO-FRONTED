@@ -11,12 +11,12 @@
       <div>
         <v-list-item>
           <v-list-item-title>
-            <strong> {{ 'Nombre Usuario' }}</strong>
+            <strong> {{ getUser.displayName || 'Nombre Usuario' }}</strong>
           </v-list-item-title>
         </v-list-item>
         <v-list-item class="mt-n7">
           <v-list-item-title>
-            <small>{{ 'Rol' }}</small>
+            <small>{{ role || 'Rol' }}</small>
           </v-list-item-title>
         </v-list-item>
         <v-divider></v-divider>
@@ -37,12 +37,20 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
+import { User } from '@/models/user';
 const auth = namespace('auth');
+const user = namespace('user');
 
 @Component
 export default class Account extends Vue {
   @auth.Action
   logout!: () => void;
+
+  @user.Getter
+  getUser!: User | null;
+
+  @user.Getter
+  role!: string | null;
 }
 </script>
 

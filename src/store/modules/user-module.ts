@@ -15,6 +15,10 @@ class UserModule extends VuexModule {
     return this.loading;
   }
 
+  get getUser(): User | null {
+    return this.user;
+  }
+
   get role(): string | undefined {
     return this.user?.roles[0];
   }
