@@ -7,7 +7,7 @@ const adminRouters: Array<RouteConfig> = [
     component: () => import('@/views/admin/Dashboard.vue'),
     name: 'dashboard-admin',
     meta: {
-      nameComponent: 'dashboard-admin',
+      nameComponent: 'Dashboard',
       requiresAuth: true,
       authorize: [ROLE_ADMIN],
     },

@@ -1,23 +1,40 @@
 <template>
   <div>
-    <div class="mt-4" :style="{ height: '48px', color: $vuetify.theme.themes.light.primary }">
-      <h1 class="mt-2 text-center">Navegación</h1>
+    <!--    <div class="mt-4" :style="{ height: '48px', color: $vuetify.theme.themes.light.primary }">
+      <h1 class="mt-2 text-center">{{ !mini ? 'Ecommerce' : 'E' }}</h1>
     </div>
+    <v-divider></v-divider>-->
+    <template>
+      <v-list class="mb-n2">
+        <v-list-item inactive>
+          <v-list-item-icon>
+            <strong
+              class="ml-4"
+              :style="{ color: $vuetify.theme.themes.light.primary, fontSize: '20px' }"
+            >
+              E
+            </strong>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <strong :style="{ color: $vuetify.theme.themes.light.primary, fontSize: '20px' }">
+              Ecommerce
+            </strong>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </template>
     <v-divider></v-divider>
     <template>
       <v-list rounded>
         <v-list-item-group color="primary">
+          <!--          <v-list-item inactive>
+            <v-list-item-icon> E </v-list-item-icon>
+            <v-list-item-content> Ecommerce </v-list-item-content>
+          </v-list-item>-->
           <v-list-item :to="{ path: item.href }" link v-for="(item, i) in items" :key="i">
             <v-list-item-icon>
               <template>
-                <v-tooltip top>
-                  <template v-slot:activator="{ on, attrs }">
-                    <span v-bind="attrs" v-on="on">
-                      <v-icon v-if="item.icon" v-text="item.icon"></v-icon>
-                    </span>
-                  </template>
-                  <span v-text="item.text"></span>
-                </v-tooltip>
+                <v-icon v-if="item.icon" v-text="item.icon"></v-icon>
               </template>
             </v-list-item-icon>
             <v-list-item-content>
@@ -32,11 +49,11 @@
 </template>
 
 <script lang="ts">
-import Component from 'vue-class-component';
-import { Vue } from 'vue-property-decorator';
+import { Prop, Vue, Component } from 'vue-property-decorator';
 
 @Component
 export default class SidebarContent extends Vue {
+  @Prop({ required: true }) readonly mini!: boolean;
   items = [
     {
       text: 'Dashboard',
