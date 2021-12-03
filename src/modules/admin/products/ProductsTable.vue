@@ -1,9 +1,13 @@
 <template>
   <div>
     <modal-add-photo ref="modal-add-photo"></modal-add-photo>
+    <modal-change-product-status
+      @successful="listProducts"
+      ref="modal-change-product-status"
+    ></modal-change-product-status>
     <CustomBodyTable title="Productos">
       <template>
-        <v-simple-table v-if="!getInitialLoading" fixed-header height="450px">
+        <v-simple-table v-if="!getInitialLoading" fixed-header height="360px">
           <template v-slot:default>
             <thead>
               <tr>
@@ -15,6 +19,7 @@
                 <th scope="col" class="text-center">TIPO</th>
                 <th scope="col" class="text-center">CATEGORIA</th>
                 <th scope="col" class="text-center">STOCK</th>
+                <th scope="col" class="text-center">ESTADO</th>
                 <th scope="col" class="text-center">ACCIONES</th>
               </tr>
             </thead>
@@ -28,19 +33,54 @@
                 <td class="text-center">{{ tempProduct.type.denomination }}</td>
                 <td class="text-center">{{ tempProduct.category.denomination }}</td>
                 <td class="text-center">{{ tempProduct.stock }}</td>
-                <td class="text-center">
-                  <div style="width: 100%" class="text-center">
+                <td class="text-center" style="width: 120px">
+                  <v-btn :color="tempProduct.state ? 'success' : 'error'" x-small>
+                    {{ tempProduct.state ? 'Habilitado' : 'Deshabilitado' }}
+                  </v-btn>
+                </td>
+                <td class="text-center" style="min-width: 120px">
+                  <v-row>
                     <v-tooltip top>
                       <template v-slot:activator="{ on, attrs }">
                         <span v-bind="attrs" v-on="on">
-                          <v-btn @click="() => openModalAddPhoto(tempProduct)" icon>
-                            <v-icon>mdi-alert-circle-outline</v-icon>
+                          <v-btn color="primary" @click="() => openModalAddPhoto(tempProduct)" icon>
+                            <v-icon>mdi-camera</v-icon>
                           </v-btn>
                         </span>
                       </template>
                       <span>Agregar Foto</span>
                     </v-tooltip>
-                  </div>
+                    <v-tooltip top>
+                      <template v-slot:activator="{ on, attrs }">
+                        <span v-bind="attrs" v-on="on">
+                          <v-btn color="warning" @click="() => openModalAddPhoto(tempProduct)" icon>
+                            <v-icon>mdi-pencil</v-icon>
+                          </v-btn>
+                        </span>
+                      </template>
+                      <span>Editar</span>
+                    </v-tooltip>
+                    <v-tooltip top>
+                      <template v-slot:activator="{ on, attrs }">
+                        <span v-bind="attrs" v-on="on">
+                          <v-btn
+                            :color="!tempProduct.state ? 'success' : 'error'"
+                            @click="() => openModalChangeProductStatus(tempProduct)"
+                            icon
+                          >
+                            <v-icon>
+                              {{
+                                tempProduct.state
+                                  ? 'mdi-close-circle-outline'
+                                  : 'mdi-checkbox-marked-circle-outline'
+                              }}
+                            </v-icon>
+                          </v-btn>
+                        </span>
+                      </template>
+                      <span>{{ tempProduct.state ? 'Deshabilitar' : 'Habilitar' }}</span>
+                    </v-tooltip>
+                  </v-row>
                 </td>
               </tr>
             </tbody>
@@ -67,9 +107,16 @@ import { namespace } from 'vuex-class';
 import CustomProgressCircular from '@/common/custom-progress-circular/CustomProgressCircular.vue';
 import ModalAddPhoto from '@/modules/admin/products/modals/ModalAddPhoto.vue';
 import CustomMessage from '@/common/custom-messages/CustomMessage.vue';
+import ModalChangeProductStatus from '@/modules/admin/products/modals/ModalChangeProductStatus.vue';
 const product = namespace('product');
 @Component({
-  components: { CustomMessage, ModalAddPhoto, CustomProgressCircular, CustomBodyTable },
+  components: {
+    ModalChangeProductStatus,
+    CustomMessage,
+    ModalAddPhoto,
+    CustomProgressCircular,
+    CustomBodyTable,
+  },
 })
 export default class ProductsList extends Vue {
   @product.Getter
@@ -81,6 +128,8 @@ export default class ProductsList extends Vue {
   @product.Mutation
   setModalAddPhotoRef!: (modalRef: any) => void;
 
+  @product.Action
+  listProducts!: () => Promise<void>;
   mounted(): void {
     const modal = this.$refs['modal-add-photo'] as Vue & { open: (product: Product) => void };
     this.setModalAddPhotoRef(modal);
@@ -88,6 +137,13 @@ export default class ProductsList extends Vue {
 
   openModalAddPhoto(product: Product): void {
     const modal = this.$refs['modal-add-photo'] as Vue & { open: (product: Product) => void };
+    modal.open(product);
+  }
+
+  openModalChangeProductStatus(product: Product): void {
+    const modal = this.$refs['modal-change-product-status'] as Vue & {
+      open: (product: Product) => void;
+    };
     modal.open(product);
   }
 }

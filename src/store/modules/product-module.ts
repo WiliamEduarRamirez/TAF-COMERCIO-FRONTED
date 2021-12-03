@@ -5,7 +5,7 @@ import productsServices from '@/services/products.services';
 @Module({ namespaced: true })
 class ProductModule extends VuexModule {
   pagination: Pagination | null = null;
-  pagingParams = new PagingParams(1, 8);
+  pagingParams = new PagingParams(1, 6);
   products: ProductModule[] = [];
   initialLoading = false;
   modalAddPhoto: any = null;
@@ -42,6 +42,12 @@ class ProductModule extends VuexModule {
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   setModalAddPhotoRef(modalRef: any): void {
     this.modalAddPhoto = modalRef;
+  }
+
+  @Mutation
+  public setPaginate(page: number): void {
+    this.pagingParams.pageNumber = page;
+    this.pagination!.currentPage = page;
   }
 
   @Mutation

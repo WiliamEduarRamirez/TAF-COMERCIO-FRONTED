@@ -1,6 +1,6 @@
 <template>
   <v-container fluid tag="section">
-    <v-card height="580">
+    <v-card height="490">
       <v-row no-gutters class="ma-4">
         <v-avatar size="70" class="mt-n5" tile color="primary">
           <v-icon dark> mdi-clipboard-text </v-icon>

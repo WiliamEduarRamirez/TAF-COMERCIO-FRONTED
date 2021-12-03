@@ -8,7 +8,14 @@
       title="Agregar imagen"
     ></custom-modal>
     <v-col class="d-flex justify-end" cols="12">
-      <v-btn @click="openModalFormProduct" color="success" small class="mr-3">
+      <v-btn
+        :disabled="getInitialLoading"
+        @click="openModalFormProduct"
+        color="success"
+        small
+        class="mr-3"
+      >
+        <v-icon left>mdi-plus-circle</v-icon>
         Agregar Producto
       </v-btn>
     </v-col>
@@ -28,10 +35,8 @@ const product = namespace('product');
 export default class ProductHeader extends Vue {
   product: Product | null = null;
 
-  /*  @Emit('product-added-successful')
-  productAddedSuccessful(): string | null {
-    return this.product;
-  }*/
+  @product.Getter
+  getInitialLoading!: boolean;
 
   @product.Action
   listProducts!: () => Promise<void>;
