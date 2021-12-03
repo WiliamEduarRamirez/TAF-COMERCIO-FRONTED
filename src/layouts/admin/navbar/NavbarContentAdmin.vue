@@ -1,6 +1,9 @@
 <template>
   <v-row>
-    <v-toolbar-title class="ml-5 mt-1">{{ $route.meta.nameComponent }}</v-toolbar-title>
+    <!--    :style="{ color: $vuetify.theme.themes.light.primary }"-->
+    <v-toolbar-title class="ml-5 mt-1">
+      {{ $route.meta.nameComponent }}
+    </v-toolbar-title>
     <v-spacer></v-spacer>
     <account></account>
   </v-row>

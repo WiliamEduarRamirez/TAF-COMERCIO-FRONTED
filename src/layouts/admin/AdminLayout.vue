@@ -4,17 +4,20 @@
       id="default-drawer"
       v-model="drawer"
       :mini-variant="mini"
-      width="220"
-      mini-variant-width="80"
+      width="240"
+      mini-variant-width="70"
       :expand-on-hover="mini"
+      dark
       app
       floating
     >
+      <!--      :clipped="mini"-->
       <!--  -->
       <sidebar-content :mini="mini"></sidebar-content>
     </v-navigation-drawer>
 
-    <v-app-bar height="70" color="primary" dense dark app>
+    <v-app-bar height="70" color="primary" dark dense app>
+      <!--      :clipped-left="mini"-->
       <v-btn @click="handleDrawer" icon>
         <v-icon>{{ drawer && !mini ? 'mdi-menu' : !drawer ? 'mdi-menu' : 'mdi-close' }}</v-icon>
       </v-btn>

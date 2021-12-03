@@ -5,25 +5,23 @@
     </div>
     <v-divider></v-divider>-->
     <template>
-      <v-list class="mb-n2">
-        <v-list-item inactive>
-          <v-list-item-icon>
-            <strong
-              class="ml-4"
-              :style="{ color: $vuetify.theme.themes.light.primary, fontSize: '20px' }"
-            >
-              E
-            </strong>
-          </v-list-item-icon>
+      <v-list nav>
+        <v-list-item>
+          <v-list-item-avatar class="align-self-center" color="white" contain>
+            <v-img
+              src="https://demos.creative-tim.com/vuetify-material-dashboard/favicon.ico"
+              max-height="40"
+            />
+          </v-list-item-avatar>
           <v-list-item-content>
-            <strong :style="{ color: $vuetify.theme.themes.light.primary, fontSize: '20px' }">
-              Ecommerce
-            </strong>
+            <v-list-item-title v-text="'Eccomerce'" />
           </v-list-item-content>
         </v-list-item>
       </v-list>
+
+      <v-divider class="mt-n3" />
     </template>
-    <v-divider></v-divider>
+    <!--    <v-divider v-if="!mini"></v-divider>-->
     <div
       v-if="!mini"
       class="mt-4"
@@ -33,7 +31,7 @@
     </div>
     <v-divider></v-divider>
     <template>
-      <v-list rounded>
+      <v-list nav rounded>
         <v-list-item-group color="primary">
           <!--          <v-list-item inactive>
             <v-list-item-icon> E </v-list-item-icon>
