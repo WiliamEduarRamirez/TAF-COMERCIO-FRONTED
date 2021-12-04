@@ -9,6 +9,7 @@ class ProductModule extends VuexModule {
   products: ProductModule[] = [];
   initialLoading = false;
   modalAddPhoto: any = null;
+  modalFromProduct: any = null;
 
   get axiosParams(): URLSearchParams {
     const params = new URLSearchParams();
@@ -23,6 +24,10 @@ class ProductModule extends VuexModule {
 
   get modalAddPhotoRef(): any {
     return this.modalAddPhoto;
+  }
+
+  get modalFromProductRef(): any {
+    return this.modalFromProduct;
   }
 
   get getProducts(): ProductModule[] {
@@ -42,6 +47,12 @@ class ProductModule extends VuexModule {
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   setModalAddPhotoRef(modalRef: any): void {
     this.modalAddPhoto = modalRef;
+  }
+
+  @Mutation
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  setModalFromProductRef(modalRef: any): void {
+    this.modalFromProduct = modalRef;
   }
 
   @Mutation

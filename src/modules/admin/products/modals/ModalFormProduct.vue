@@ -4,7 +4,7 @@
       <v-card>
         <v-card-title>
           <span class="text-h6" :style="{ color: $vuetify.theme.themes.dark.primary }">
-            <strong> AGREGAR PRODUCTO </strong>
+            <strong> {{ !editMode ? 'AGREGAR PRODUCTO' : 'EDITAR PRODUCTO' }} </strong>
           </span>
         </v-card-title>
         <v-divider></v-divider>
@@ -67,7 +67,7 @@
               </v-col>
               <v-col cols="6">
                 <v-select
-                  @change="listCategories(productFormValues.typeId)"
+                  @change="onChangeType"
                   :disabled="loadingTypes || loading"
                   :loading="loadingTypes"
                   v-model.trim="productFormValues.typeId"
@@ -96,13 +96,13 @@
           <v-spacer></v-spacer>
           <v-btn color="error" :disabled="loading" @click="close"> Cancelar </v-btn>
           <v-btn
-            @click="addProduct"
+            @click="modalAction"
             class="ma-2"
             :disabled="!valid || loadingTypes || loadingCategories"
             :loading="loading"
-            color="success"
+            :color="editMode ? 'primary' : 'success'"
           >
-            Agregar
+            {{ editMode ? 'Editar' : 'Agregar' }}
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -138,20 +138,38 @@ export default class ProductsList extends Vue {
   productFormValues = new ProductFormValues();
 
   @Emit('successful')
-  successful(product: Product): Product {
+  successful(product: Product | null): Product | null {
     return product;
   }
 
   open(product: Product | null): void {
+    this.dialog = true;
     this.editMode = !!product;
     this.listTypes();
-    /* this.listCategories();*/
-    this.dialog = true;
+    if (this.editMode && product) {
+      const productForm = {
+        ...this.productFormValues,
+        ...product,
+        categoryId: product.category.id,
+        typeId: product.type.id,
+      };
+      this.productFormValues = new ProductFormValues(productForm as ProductFormValues);
+      this.listCategories(this.productFormValues.typeId);
+    }
   }
-  addProduct(): void {
+
+  modalAction(): void {
     const form = this.$refs.form as Vue & { validate: () => boolean };
     if (!form.validate()) return;
     this.loading = true;
+    if (!this.editMode) {
+      this.addProduct();
+    } else {
+      this.editProduct();
+    }
+  }
+
+  addProduct(): void {
     productsServices.add(this.productFormValues).then((res) => {
       this.loading = false;
       this.$toast.success('Producto agregado correctamente');
@@ -159,6 +177,22 @@ export default class ProductsList extends Vue {
       this.close();
     });
   }
+
+  onChangeType(): void {
+    this.categoriesItems = [];
+    this.productFormValues.categoryId = '';
+    this.listCategories(this.productFormValues.typeId);
+  }
+
+  editProduct(): void {
+    productsServices.edit(this.productFormValues).then(() => {
+      this.loading = false;
+      this.$toast.success('Producto editado correctamente');
+      this.successful(null);
+      this.close();
+    });
+  }
+
   listCategories(typeId: string): void {
     this.loadingCategories = true;
     categoriesServices
@@ -183,8 +217,11 @@ export default class ProductsList extends Vue {
   }
   resetForm(): void {
     const form = this.$refs.form as Vue & { resetValidation: () => void };
-    form.resetValidation();
     this.productFormValues = new ProductFormValues();
+    this.categoriesItems = [];
+    this.typesItems = [];
+    this.editMode = false;
+    form.resetValidation();
   }
   close(): void {
     this.resetForm();

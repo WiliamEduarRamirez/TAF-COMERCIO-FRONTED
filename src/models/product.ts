@@ -39,6 +39,7 @@ export class ProductFormValues {
   cost: number | null = null;
   price: number | null = null;
   stock: number | null = null;
+  state: boolean | null = null;
   categoryId = '';
   typeId = '';
 
@@ -51,6 +52,7 @@ export class ProductFormValues {
       this.cost = product.cost;
       this.price = product.price;
       this.stock = product.stock;
+      this.state = product.state;
       this.categoryId = product.categoryId;
       this.typeId = product.typeId;
     }

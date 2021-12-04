@@ -44,24 +44,40 @@ export default class ProductHeader extends Vue {
   @product.Getter
   modalAddPhotoRef!: any;
 
+  @product.Mutation
+  setModalFromProductRef!: (modalRef: any) => void;
+
+  mounted(): void {
+    const modal = this.$refs['modal-form-product'] as Vue & {
+      open: (product: Product | null) => void;
+    };
+    this.setModalFromProductRef(modal);
+  }
+
+  destroyed(): void {
+    this.setModalFromProductRef(null);
+  }
+
   productAddedSuccessful(): void {
     this.modalAddPhotoRef.open(this.product);
   }
 
-  openModalFormProduct(product: Product | null): void {
+  openModalFormProduct(): void {
     const modal = this.$refs['modal-form-product'] as Vue & {
       open: (product: Product | null) => void;
     };
-    modal.open(product);
+    modal.open(null);
   }
 
-  successfulAdd(product: Product): void {
+  successfulAdd(product: Product | null): void {
     this.product = product;
     this.listProducts();
-    const modal = this.$refs['custom-modal-successful'] as Vue & {
-      open: () => void;
-    };
-    modal.open();
+    if (product) {
+      const modal = this.$refs['custom-modal-successful'] as Vue & {
+        open: () => void;
+      };
+      modal.open();
+    }
   }
 }
 </script>

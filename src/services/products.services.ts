@@ -6,6 +6,8 @@ const productsServices = {
   list: (params: URLSearchParams): Promise<PaginatedResult<Product[]>> =>
     request.getParams<PaginatedResult<Product[]>>('/products', params),
   add: (data: ProductFormValues): Promise<Product> => request.post<Product>('/products', data),
+  edit: (data: ProductFormValues): Promise<Product> =>
+    request.put<Product>(`/products/${data.id}`, data),
   changeStatus: (productId: string, state: boolean): Promise<void> =>
     request.put<void>(`/products/${productId}/changeStatus`, { state }),
 };

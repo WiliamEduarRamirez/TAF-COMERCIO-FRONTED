@@ -34,9 +34,9 @@
                 <td class="text-center">{{ tempProduct.category.denomination }}</td>
                 <td class="text-center">{{ tempProduct.stock }}</td>
                 <td class="text-center" style="width: 120px">
-                  <v-btn :color="tempProduct.state ? 'success' : 'error'" x-small>
+                  <v-chip :color="tempProduct.state ? 'success' : 'error'" small>
                     {{ tempProduct.state ? 'Habilitado' : 'Deshabilitado' }}
-                  </v-btn>
+                  </v-chip>
                 </td>
                 <td class="text-center" style="min-width: 120px">
                   <v-row>
@@ -53,7 +53,11 @@
                     <v-tooltip top>
                       <template v-slot:activator="{ on, attrs }">
                         <span v-bind="attrs" v-on="on">
-                          <v-btn color="warning" @click="() => openModalAddPhoto(tempProduct)" icon>
+                          <v-btn
+                            color="warning"
+                            @click="() => openModalFormProduct(tempProduct)"
+                            icon
+                          >
                             <v-icon>mdi-pencil</v-icon>
                           </v-btn>
                         </span>
@@ -125,14 +129,26 @@ export default class ProductsList extends Vue {
   @product.Getter
   getProducts!: Product[];
 
+  @product.Getter
+  modalFromProductRef!: any;
+
   @product.Mutation
   setModalAddPhotoRef!: (modalRef: any) => void;
 
   @product.Action
   listProducts!: () => Promise<void>;
+
   mounted(): void {
     const modal = this.$refs['modal-add-photo'] as Vue & { open: (product: Product) => void };
     this.setModalAddPhotoRef(modal);
+  }
+
+  destroyed(): any {
+    this.setModalAddPhotoRef(null);
+  }
+
+  openModalFormProduct(product: Product): void {
+    this.modalFromProductRef.open(product);
   }
 
   openModalAddPhoto(product: Product): void {
