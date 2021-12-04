@@ -19,12 +19,16 @@
           <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
         </template>
         <v-spacer></v-spacer>
-
+        <v-badge color="error" :content="totalItems.toString()" overlap>
+          <v-btn class="mx-2" fab dark small color="success">
+            <v-icon dark> mdi-cart-variant </v-icon>
+          </v-btn>
+        </v-badge>
         <!--        class="hidden-sm-and-down"-->
 
-        <v-responsive v-if="!$vuetify.breakpoint.smAndDown" max-width="230">
+        <!--        <v-responsive v-if="!$vuetify.breakpoint.smAndDown" max-width="230">
           <v-text-field dense flat hide-details rounded solo-inverted></v-text-field>
-        </v-responsive>
+        </v-responsive>-->
       </v-container>
 
       <v-btn v-if="!$vuetify.breakpoint.smAndDown" color="error" small class="mr-2">
@@ -86,6 +90,7 @@ import Component from 'vue-class-component';
 import { namespace } from 'vuex-class';
 import { Type } from '@/models/product';
 const type = namespace('type');
+const shoppingCart = namespace('shoppingCart');
 
 @Component
 export default class CustomerLayout extends Vue {
@@ -94,6 +99,10 @@ export default class CustomerLayout extends Vue {
 
   @type.Getter
   types!: Type[];
+
+  @shoppingCart.Getter
+  totalItems!: number;
+
 }
 </script>
 

@@ -36,7 +36,7 @@
     <v-divider></v-divider>
     <v-card-actions>
       <div style="width: 100%" class="text-center">
-        <v-btn color="primary" rounded> Agregar </v-btn>
+        <v-btn @click="addItemsOnStart(product)" color="primary" rounded> Agregar </v-btn>
       </div>
     </v-card-actions>
   </v-card>
@@ -45,10 +45,15 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import { Product } from '@/models/product';
+import { namespace } from 'vuex-class';
+
+const shoppingCart = namespace('shoppingCart');
 
 @Component
 export default class CardProduct extends Vue {
   @Prop({ required: true }) readonly product!: Product;
+  @shoppingCart.Action
+  addItemsOnStart!: (product: Product) => void;
 }
 </script>
 
