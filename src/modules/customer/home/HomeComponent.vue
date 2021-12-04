@@ -6,7 +6,7 @@
           <strong>Category {{ n }}</strong>
         </v-col>
 
-        <v-col v-for="j in 6" :key="`${n}${j}`" cols="12" sm="6" md="3">
+        <v-col v-for="j in 6" :key="`${n}${j}`" cols="12" sm="6" md="4">
           <v-card height="150"></v-card>
         </v-col>
       </template>

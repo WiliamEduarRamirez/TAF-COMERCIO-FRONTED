@@ -3,7 +3,7 @@ import { RouteConfig } from 'vue-router';
 const customerRouters: Array<RouteConfig> = [
   {
     path: '',
-    component: () => import('@/modules/customer/home/HomeComponent.vue'),
+    component: () => import('@/views/customer/Home.vue'),
     name: 'home',
     meta: {
       nameComponent: 'Home',
