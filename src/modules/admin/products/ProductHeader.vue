@@ -39,7 +39,7 @@ export default class ProductHeader extends Vue {
   getInitialLoading!: boolean;
 
   @product.Action
-  listProducts!: () => Promise<void>;
+  loadProducts!: () => Promise<void>;
 
   @product.Getter
   modalAddPhotoRef!: any;
@@ -71,7 +71,7 @@ export default class ProductHeader extends Vue {
 
   successfulAdd(product: Product | null): void {
     this.product = product;
-    this.listProducts();
+    this.loadProducts();
     if (product) {
       const modal = this.$refs['custom-modal-successful'] as Vue & {
         open: () => void;

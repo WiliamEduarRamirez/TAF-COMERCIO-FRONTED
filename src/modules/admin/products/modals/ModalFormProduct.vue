@@ -170,6 +170,7 @@ export default class ProductsList extends Vue {
   }
 
   addProduct(): void {
+    /*delete this.productFormValues.state;*/
     productsServices.add(this.productFormValues).then((res) => {
       this.loading = false;
       this.$toast.success('Producto agregado correctamente');

@@ -10,30 +10,29 @@
         <v-divider></v-divider>
         <v-card-text class="mt-5">
           <v-container>
-            <v-form ref="form" v-model="valid" lazy-validation>
-              <v-row>
-                <custom-dropzone
-                  ref="custom-dropzone-product"
-                  @remove="deleteFile"
-                  @input-file="inputFile"
-                ></custom-dropzone>
-              </v-row>
-            </v-form>
+            <div style="width: 100%">
+              <custom-dropzone
+                ref="custom-dropzone-product"
+                @remove="deleteFile"
+                @input-file="inputFile"
+              ></custom-dropzone>
+            </div>
           </v-container>
         </v-card-text>
         <v-divider></v-divider>
         <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn :disabled="loading" color="error" @click="close"> Cancelar </v-btn>
-          <v-btn
-            @click="uploadPhoto"
-            class="ma-2"
-            :disabled="!file"
-            :loading="loading"
-            color="success"
-          >
-            Agregar
-          </v-btn>
+          <div class="text-center" style="width: 100%">
+            <v-btn :disabled="loading" color="error" class="ml-2" @click="close"> Cancelar </v-btn>
+            <v-btn
+              @click="uploadPhoto"
+              class="ma-2"
+              :disabled="!file"
+              :loading="loading"
+              color="success"
+            >
+              Agregar
+            </v-btn>
+          </div>
         </v-card-actions>
       </v-card>
     </v-dialog>

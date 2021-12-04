@@ -24,14 +24,14 @@ export default class ProductPaginate extends Vue {
   getInitialLoading!: boolean;
 
   @product.Action
-  listProducts!: () => Promise<void>;
+  loadProducts!: () => Promise<void>;
 
   @product.Mutation
   setPaginate!: (page: number) => void;
 
   async changePage(value: number): Promise<void> {
     this.setPaginate(value);
-    await this.listProducts();
+    await this.loadProducts();
   }
 }
 </script>

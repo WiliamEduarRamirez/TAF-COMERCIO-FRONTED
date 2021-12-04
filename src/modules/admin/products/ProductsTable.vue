@@ -2,7 +2,7 @@
   <div>
     <modal-add-photo ref="modal-add-photo"></modal-add-photo>
     <modal-change-product-status
-      @successful="listProducts"
+      @successful="loadProducts"
       ref="modal-change-product-status"
     ></modal-change-product-status>
     <CustomBodyTable title="Productos">
@@ -24,7 +24,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(tempProduct, index) in getProducts" :key="index">
+              <tr v-for="(tempProduct, index) in products" :key="index">
                 <td class="text-center">{{ tempProduct.code }}</td>
                 <td class="text-center">{{ formatDateLocal(tempProduct.createdAt) }}</td>
                 <td class="text-center">{{ tempProduct.denomination }}</td>
@@ -95,7 +95,7 @@
         </div>
         <custom-message
           style="margin-top: -250px"
-          v-if="getProducts.length === 0 && !getInitialLoading"
+          v-if="products.length === 0 && !getInitialLoading"
           message="No disponde de ningun producto en este momento"
         ></custom-message>
       </template>
@@ -127,7 +127,7 @@ export default class ProductsList extends Vue {
   getInitialLoading!: boolean;
 
   @product.Getter
-  getProducts!: Product[];
+  products!: Product[];
 
   @product.Getter
   modalFromProductRef!: any;
@@ -136,7 +136,7 @@ export default class ProductsList extends Vue {
   setModalAddPhotoRef!: (modalRef: any) => void;
 
   @product.Action
-  listProducts!: () => Promise<void>;
+  loadProducts!: () => Promise<void>;
 
   mounted(): void {
     const modal = this.$refs['modal-add-photo'] as Vue & { open: (product: Product) => void };

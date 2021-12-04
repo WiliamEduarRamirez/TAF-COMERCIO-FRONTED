@@ -1,25 +1,53 @@
 import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators';
-import { Pagination, PagingParams } from '@/models/pagination';
+import { Pagination, PagingParams, PredicateParams } from '@/models/pagination';
 import productsServices from '@/services/products.services';
+import { Product } from '@/models/product';
 
 @Module({ namespaced: true })
 class ProductModule extends VuexModule {
-  pagination: Pagination | null = null;
-  pagingParams = new PagingParams(1, 6);
-  products: ProductModule[] = [];
-  initialLoading = false;
+  _pagination: Pagination | null = null;
+  _pagingParams = new PagingParams(1, 6);
+  _products: Product[] = [];
+  _initialLoading = false;
+  _predicate = new Map();
   modalAddPhoto: any = null;
   modalFromProduct: any = null;
 
+  @Mutation
+  setPredicate(predicateParams: PredicateParams): void {
+    const resetPredicate = () => {
+      this._predicate.forEach((value, key) => {
+        this._predicate.delete(key);
+      });
+    };
+    switch (predicateParams.predicate) {
+      case 'categoryId':
+        resetPredicate();
+        this._predicate.set('categoryId', predicateParams.value);
+        this._predicate.set('isEnable', true);
+        break;
+      case 'typeId':
+        resetPredicate();
+        this._predicate.set('typeId', predicateParams.value);
+        break;
+      case 'isEnable':
+        this._predicate.set('isEnable', predicateParams.value);
+        break;
+    }
+  }
+
   get axiosParams(): URLSearchParams {
     const params = new URLSearchParams();
-    params.append('pageNumber', this.pagingParams.pageNumber.toString());
-    params.append('pageSize', this.pagingParams.pageSize.toString());
+    params.append('pageNumber', this._pagingParams.pageNumber.toString());
+    params.append('pageSize', this._pagingParams.pageSize.toString());
+    this._predicate.forEach((value, key) => {
+      params.append(key, value);
+    });
     return params;
   }
 
   get getInitialLoading(): boolean {
-    return this.initialLoading;
+    return this._initialLoading;
   }
 
   get modalAddPhotoRef(): any {
@@ -30,17 +58,17 @@ class ProductModule extends VuexModule {
     return this.modalFromProduct;
   }
 
-  get getProducts(): ProductModule[] {
-    return this.products;
+  get products(): Product[] {
+    return this._products;
   }
 
   get getPaginate(): Pagination | null {
-    return this.pagination;
+    return this._pagination;
   }
 
   @Mutation
-  public setProducts(products: ProductModule[]): void {
-    this.products = products;
+  public setProducts(products: Product[]): void {
+    this._products = products;
   }
 
   @Mutation
@@ -57,31 +85,36 @@ class ProductModule extends VuexModule {
 
   @Mutation
   public setPaginate(page: number): void {
-    this.pagingParams.pageNumber = page;
-    this.pagination!.currentPage = page;
+    this._pagingParams.pageNumber = page;
+    this._pagination!.currentPage = page;
   }
 
   @Mutation
-  public setPagination(pagination: Pagination): void {
-    this.pagination = pagination;
+  public setPagingParams(pagingParams: PagingParams): void {
+    this._pagingParams = pagingParams;
+  }
+
+  @Mutation
+  public setPagination(_pagination: Pagination): void {
+    this._pagination = _pagination;
   }
 
   @Mutation
   public setInitialLoading(val: boolean): void {
-    this.initialLoading = val;
+    this._initialLoading = val;
   }
 
-  @Action
-  async listProducts(): Promise<void> {
+  @Action({ rawError: true })
+  async loadProducts(): Promise<void> {
     this.context.commit('setInitialLoading', true);
     try {
       const result = await productsServices.list(this.axiosParams);
       this.context.commit('setProducts', result.data);
       this.context.commit('setPagination', result.pagination);
-    } catch (e) {
-      console.log(e);
-    } finally {
       this.context.commit('setInitialLoading', false);
+    } catch (e) {
+      this.context.commit('setInitialLoading', false);
+      throw e;
     }
   }
 }

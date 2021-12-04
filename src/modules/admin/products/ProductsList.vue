@@ -20,9 +20,9 @@ import ProductPaginate from '@/modules/admin/products/ProductPaginate.vue';
 })
 export default class ProductsList extends Vue {
   @product.Action
-  listProducts!: () => Promise<void>;
+  loadProducts!: () => Promise<void>;
   async created(): Promise<void> {
-    await this.listProducts();
+    await this.loadProducts();
   }
 }
 </script>

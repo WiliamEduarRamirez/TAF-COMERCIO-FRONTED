@@ -1,12 +1,15 @@
 export interface Product {
   id: string;
+  categoryId: string;
+  typeId: string;
   code: string;
   denomination: string;
   description: string;
   stock: number;
   cost: number;
   price: number;
-  state: boolean;
+  state?: boolean;
+  photoUrl: string | null;
   createdAt: string;
   updatedAt: string;
   type: Type;
@@ -39,7 +42,7 @@ export class ProductFormValues {
   cost: number | null = null;
   price: number | null = null;
   stock: number | null = null;
-  state: boolean | null = null;
+  state?: boolean = undefined;
   categoryId = '';
   typeId = '';
 

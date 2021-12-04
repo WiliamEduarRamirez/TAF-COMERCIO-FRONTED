@@ -12,11 +12,13 @@
       <custom-progress-circular></custom-progress-circular>
     </v-col>
     <v-col cols="12" v-if="file && !loading">
-      <v-img contain width="300" :src="file">
-        <v-btn @click="remove" color="error" fab small>
-          <v-icon>mdi-close</v-icon>
-        </v-btn>
-      </v-img>
+      <div class="d-flex justify-center align-center">
+        <v-img contain width="300" :src="file">
+          <v-btn @click="remove" color="error" fab small>
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+        </v-img>
+      </div>
     </v-col>
   </v-row>
 </template>
