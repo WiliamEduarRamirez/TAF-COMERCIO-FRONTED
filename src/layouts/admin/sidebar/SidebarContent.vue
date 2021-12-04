@@ -31,7 +31,7 @@
     </div>
     <v-divider></v-divider>
     <template>
-      <v-list nav rounded>
+      <v-list nav>
         <v-list-item-group color="primary">
           <!--          <v-list-item inactive>
             <v-list-item-icon> E </v-list-item-icon>

@@ -8,7 +8,7 @@
 
     <v-list>
       <!--        <div class="hidden-md-and-up">-->
-      <div>
+      <div v-if="getUser">
         <v-list-item>
           <v-list-item-title>
             <strong> {{ getUser.displayName || 'Nombre Usuario' }}</strong>

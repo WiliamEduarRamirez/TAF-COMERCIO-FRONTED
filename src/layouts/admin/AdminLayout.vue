@@ -18,13 +18,15 @@
 
     <v-app-bar height="70" color="primary" dark dense app>
       <!--      :clipped-left="mini"-->
+
       <v-btn @click="handleDrawer" icon>
         <v-icon>{{ drawer && !mini ? 'mdi-menu' : !drawer ? 'mdi-menu' : 'mdi-close' }}</v-icon>
       </v-btn>
+
       <!--      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>-->
       <navbar-content-admin></navbar-content-admin>
     </v-app-bar>
-    <v-main class="grey lighten-4">
+    <v-main :class="!$vuetify.theme.dark ? 'grey lighten-4' : ''">
       <!--  -->
       <v-container fluid>
         <v-fade-transition mode="out-in">

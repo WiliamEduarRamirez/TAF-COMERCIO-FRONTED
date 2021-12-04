@@ -5,6 +5,13 @@
       {{ $route.meta.nameComponent }}
     </v-toolbar-title>
     <v-spacer></v-spacer>
+
+    <v-btn class="mt-n1 mr-n3" @click="$vuetify.theme.dark = !$vuetify.theme.dark" icon>
+      <v-icon>
+        {{ $vuetify.theme.dark ? 'mdi-weather-sunny' : 'mdi-weather-night' }}
+      </v-icon>
+    </v-btn>
+
     <account></account>
   </v-row>
 </template>
