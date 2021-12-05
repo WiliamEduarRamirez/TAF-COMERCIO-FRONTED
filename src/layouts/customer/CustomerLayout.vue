@@ -10,19 +10,6 @@
         :handle-drawer="handleDrawer"
         :handle-drawer-right="handleDrawerRight"
       ></navbar-customer-content>
-      <!--      <v-btn v-if="!$vuetify.breakpoint.smAndDown" color="error" small class="mr-2">
-        Registrarse
-      </v-btn>
-      <v-btn v-if="!$vuetify.breakpoint.smAndDown" small color="success" class="mr-2">
-        Iniciar Sesión
-      </v-btn>
-      <v-btn v-if="$vuetify.breakpoint.smAndDown" class="mr-2" small icon>
-        <v-icon>mdi-account</v-icon>
-      </v-btn>-->
-
-      <!--     <v-btn class="mr-2" small icon>
-        <v-icon>mdi-account</v-icon>
-      </v-btn>-->
     </v-app-bar>
     <v-main class="grey lighten-3">
       <v-container>
@@ -91,7 +78,7 @@
       app
       clipped
       right
-      width="350"
+      width="380"
       temporary
     >
       <template v-slot:prepend>

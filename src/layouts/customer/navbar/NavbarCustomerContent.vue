@@ -1,19 +1,15 @@
 <template>
   <v-container class="py-0 fill-height">
-    <!--        <v-avatar class="mr-2" color="grey darken-1" size="32"> </v-avatar>-->
     <img
       alt="logo-unsch"
       :src="require('@/assets/images/logo-unsch.png')"
       style="width: 145px; height: 65px"
     />
-    <!--        <v-img height="70" contain :src="require('@/assets/images/logo-unsch.png')"></v-img>-->
-    <!--        class="hidden-md-and-up"-->
     <template v-if="!$vuetify.breakpoint.smAndDown">
       <v-btn small v-for="link in links" :key="link" text>
         {{ link }}
       </v-btn>
     </template>
-
     <template v-else>
       <v-app-bar-nav-icon @click="handleDrawer"></v-app-bar-nav-icon>
     </template>
@@ -25,12 +21,11 @@
     <v-btn class="mr-2" fab color="primary" small>
       <v-icon>mdi-account</v-icon>
     </v-btn>
-    <v-badge color="error" :content="totalItems.toString()" overlap>
+    <v-badge offset-x="20" offset-y="15" color="error" :content="totalItems.toString()">
       <v-btn @click.stop="handleDrawerRight" class="mx-2" fab small color="success">
         <v-icon dark> mdi-cart-variant </v-icon>
       </v-btn>
     </v-badge>
-    <!--        class="hidden-sm-and-down"-->
   </v-container>
 </template>
 

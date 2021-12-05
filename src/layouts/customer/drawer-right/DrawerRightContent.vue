@@ -40,7 +40,7 @@
           </h4>
         </v-col>
         <v-col cols="2">
-          <div class="mr-5 mt-4">
+          <div class="ml-n5 mt-4">
             <v-btn @click="deleteAmountItem(tempItem)" color="error" fab x-small>
               <v-icon>mdi-close</v-icon>
             </v-btn>
