@@ -26,8 +26,13 @@
       <p class="my-4 mb-0"><strong>Tipo:</strong> {{ product.type.denomination }}</p>
       <p class="mb-3"><strong>Categoria:</strong> {{ product.category.denomination }}</p>
       <!--      <div class="grey&#45;&#45;text">Plaza vea</div>-->
-      <div class="my-3 text-subtitle-1 green--text">
-        <strong> S/ {{ product.price }} </strong>
+      <div class="my-3 d-flex">
+        <h3 class="mr-2 mb-0" :style="{ color: $vuetify.theme.themes.dark.primary }">
+          S/{{ formatDecimal(product.price) }}
+        </h3>
+        <h3 class="gray--text lighten-4 text-decoration-line-through mb-0">
+          S/{{ formatDecimal(product.price + 16) }}
+        </h3>
       </div>
       <div>
         {{ product.description }}

@@ -25,5 +25,9 @@ class Formats extends Vue {
     H = H < 10 ? '0' + H : H;
     return `${H}:${min}${showSeg ? ':' + seg : ''}`;
   }
+  formatDecimal(decimal: number): number | string {
+    if (!decimal) return 0;
+    return decimal.toFixed(2);
+  }
 }
 export default Formats;

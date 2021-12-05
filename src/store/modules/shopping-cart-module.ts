@@ -15,6 +15,14 @@ class ShoppingCartModule extends VuexModule {
     return this._shoppingCartItems.length;
   }
 
+  get totalPrice(): number {
+    let totalPrice = 0;
+    this._shoppingCartItems.forEach((x) => {
+      totalPrice += x.product.price * x.amount;
+    });
+    return totalPrice;
+  }
+
   @Mutation
   public setShoppingCartItems(cartItem: CartItem): void {
     const existItem = this._shoppingCartItems.find((x) => x.product.id === cartItem.product.id);
@@ -26,6 +34,34 @@ class ShoppingCartModule extends VuexModule {
       this._shoppingCartItems = [...this._shoppingCartItems, cartItem];
     }
     window.localStorage.setItem('shopping-cart-items', JSON.stringify(this._shoppingCartItems));
+  }
+
+  @Mutation
+  public changeAmountItem(cartItem: CartItem): void {
+    this._shoppingCartItems = this._shoppingCartItems.map((item) =>
+      item.product.id === cartItem.product.id ? cartItem : item
+    );
+    window.localStorage.setItem('shopping-cart-items', JSON.stringify(this._shoppingCartItems));
+  }
+
+  @Mutation
+  public deleteAmountItem(cartItem: CartItem): void {
+    this._shoppingCartItems = this._shoppingCartItems.filter(
+      (item) => item.product.id !== cartItem.product.id
+    );
+    window.localStorage.setItem('shopping-cart-items', JSON.stringify(this._shoppingCartItems));
+  }
+
+  @Action
+  public increaseAmount(cartItem: CartItem): void {
+    cartItem.amount = cartItem.amount + 1;
+    this.context.commit('changeAmountItem', cartItem);
+  }
+
+  @Action
+  public decreaseAmount(cartItem: CartItem): void {
+    cartItem.amount = cartItem.amount - 1;
+    this.context.commit('changeAmountItem', cartItem);
   }
 
   @Action
