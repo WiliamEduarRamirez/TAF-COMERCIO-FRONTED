@@ -6,40 +6,10 @@
       app
     ></v-navigation-drawer>
     <v-app-bar height="70" color="white" flat app clipped-right>
-      <v-container class="py-0 fill-height">
-        <!--        <v-avatar class="mr-2" color="grey darken-1" size="32"> </v-avatar>-->
-        <img
-          alt="logo-unsch"
-          :src="require('@/assets/images/logo-unsch.png')"
-          style="width: 145px; height: 65px"
-        />
-        <!--        <v-img height="70" contain :src="require('@/assets/images/logo-unsch.png')"></v-img>-->
-        <!--        class="hidden-md-and-up"-->
-        <template v-if="!$vuetify.breakpoint.smAndDown">
-          <v-btn small v-for="link in links" :key="link" text>
-            {{ link }}
-          </v-btn>
-        </template>
-
-        <template v-else>
-          <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-        </template>
-        <v-spacer></v-spacer>
-        <v-responsive v-if="!$vuetify.breakpoint.smAndDown" max-width="230">
-          <v-text-field dense flat hide-details rounded solo-inverted></v-text-field>
-        </v-responsive>
-        <v-spacer></v-spacer>
-        <v-btn class="mr-2" fab color="primary" small>
-          <v-icon>mdi-account</v-icon>
-        </v-btn>
-        <v-badge color="error" :content="totalItems.toString()" overlap>
-          <v-btn @click.stop="handleDrawerRight" class="mx-2" fab small color="success">
-            <v-icon dark> mdi-cart-variant </v-icon>
-          </v-btn>
-        </v-badge>
-        <!--        class="hidden-sm-and-down"-->
-      </v-container>
-
+      <navbar-customer-content
+        :handle-drawer="handleDrawer"
+        :handle-drawer-right="handleDrawerRight"
+      ></navbar-customer-content>
       <!--      <v-btn v-if="!$vuetify.breakpoint.smAndDown" color="error" small class="mr-2">
         Registrarse
       </v-btn>
@@ -54,15 +24,6 @@
         <v-icon>mdi-account</v-icon>
       </v-btn>-->
     </v-app-bar>
-    <!--    <v-system-bar app fixed>
-      <v-spacer></v-spacer>
-
-      <v-icon>mdi-square</v-icon>
-
-      <v-icon>mdi-circle</v-icon>
-
-      <v-icon>mdi-triangle</v-icon>
-    </v-system-bar>-->
     <v-main class="grey lighten-3">
       <v-container>
         <v-row class="my-3">
@@ -112,25 +73,8 @@
         </v-row>
         <v-row>
           <v-col class="mt-3" v-if="$vuetify.breakpoint.mdAndUp" cols="2">
-            <v-sheet rounded="lg">
-              <v-list color="transparent">
-                <v-list-item v-for="(tempType, index) in types" :key="index" link>
-                  <v-list-item-content>
-                    <v-list-item-title> {{ tempType.denomination }} </v-list-item-title>
-                  </v-list-item-content>
-                </v-list-item>
-
-                <v-divider class="my-2"></v-divider>
-
-                <v-list-item link color="grey lighten-4">
-                  <v-list-item-content>
-                    <v-list-item-title> Refresh </v-list-item-title>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list>
-            </v-sheet>
+            <main-types-list></main-types-list>
           </v-col>
-
           <v-col class="mt-n15">
             <v-container fluid>
               <v-fade-transition mode="out-in">
@@ -151,62 +95,45 @@
       temporary
     >
       <template v-slot:prepend>
-        <v-list>
-          <v-list-item>
-            <v-list-item-icon>
-              <v-icon>mdi-shopping-outline</v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title>{{ totalItems.toString() }} articulos</v-list-item-title>
-            </v-list-item-content>
-            <v-list-item-action>
-              <v-btn @click.stop="handleDrawerRight" icon>
-                <v-icon>mdi-close</v-icon>
-              </v-btn>
-            </v-list-item-action>
-          </v-list-item>
-        </v-list>
+        <drawer-right-header :handle-drawer-right="handleDrawerRight"></drawer-right-header>
         <v-divider></v-divider>
       </template>
-
       <drawer-right-content
         v-if="totalItems !== 0"
         :handle-drawer-right="handleDrawerRight"
       ></drawer-right-content>
-      <template v-if="totalItems !== 0" v-slot:append>
-        <div class="pa-2">
-          <v-btn color="primary" block class="my-2 text-capitalize">
-            Verificar ahora (S/.{{ formatDecimal(totalPrice) }})
-          </v-btn>
-          <v-btn color="primary" outlined block class="my-2 text-capitalize"> Ver Carrito </v-btn>
-        </div>
-      </template>
       <template v-if="totalItems === 0" v-slot:default>
-        <div class="empty-cart-sidebar d-flex flex-column justify-center align-center mt-10">
-          <div class="v-avatar mb-8 rounded-0" style="height: 90px; min-width: 90px; width: 90px">
-            <img :src="require('@/assets/images/empty-cart.png')" alt="" />
-          </div>
-          <p class="grey--text text--darken-2 px-5 mx-10 text-center">
-            Tu carrito de compras se encuentra vacia. Empieza a comprar
-          </p>
-        </div>
+        <drawer-right-empty-content></drawer-right-empty-content>
+      </template>
+      <template v-if="totalItems !== 0" v-slot:append>
+        <drawer-right-footer></drawer-right-footer>
       </template>
     </v-navigation-drawer>
   </v-app>
 </template>
 
 <script lang="ts">
-/*import NavbarCustomer from '@/layouts/customer/navbar/NavbarCustomer';*/
 import { Vue } from 'vue-property-decorator';
 import Component from 'vue-class-component';
 
 import { namespace } from 'vuex-class';
-import { Type } from '@/models/product';
 import DrawerRightContent from '@/layouts/customer/drawer-right/DrawerRightContent.vue';
-const type = namespace('type');
+import NavbarCustomerContent from '@/layouts/customer/navbar/NavbarCustomerContent.vue';
+import DrawerRightHeader from '@/layouts/customer/drawer-right/DrawerRightHeader.vue';
+import DrawerRightFooter from '@/layouts/customer/drawer-right/DrawerRightFooter.vue';
+import MainTypesList from '@/layouts/customer/main/MainTypesList.vue';
+import DrawerRightEmptyContent from '@/layouts/customer/drawer-right/DrawerRightEmptyContent.vue';
+
 const shoppingCart = namespace('shoppingCart');
 @Component({
-  components: { DrawerRightContent },
+  components: {
+    DrawerRightEmptyContent,
+    MainTypesList,
+    DrawerRightFooter,
+    DrawerRightHeader,
+    NavbarCustomerContent,
+    DrawerRightContent,
+  },
 })
 export default class CustomerLayout extends Vue {
   drawerRight = false;
@@ -216,26 +143,16 @@ export default class CustomerLayout extends Vue {
     { title: 'Click Me' },
     { title: 'Click Me 2' },
   ];
-  links: string[] = ['Dashboard', 'Messages'];
   drawer = false;
-
   handleDrawerRight(): void {
     this.drawerRight = !this.drawerRight;
   }
-
-  @type.Getter
-  types!: Type[];
-
+  handleDrawer(): void {
+    this.drawer = !this.drawer;
+  }
   @shoppingCart.Getter
   totalItems!: number;
-
-  @shoppingCart.Getter
-  totalPrice!: number;
 }
 </script>
 
-<style scoped>
-.empty-cart-sidebar {
-  height: 80vh;
-}
-</style>
+<style scoped></style>

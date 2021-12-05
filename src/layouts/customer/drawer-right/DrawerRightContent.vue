@@ -31,13 +31,13 @@
           </v-img>
         </v-col>
         <v-col cols="4">
-          <h5 class="text-truncate text-lowercase">
+          <h4 class="text-truncate text-lowercase">
             {{ tempItem.product.denomination }}
-          </h5>
+          </h4>
           <p class="text-tiny mb-1">S/. {{ tempItem.product.price }} x {{ tempItem.amount }}</p>
-          <h5 :style="{ color: $vuetify.theme.themes.dark.primary }">
+          <h4 :style="{ color: $vuetify.theme.themes.dark.primary }">
             {{ formatDecimal(tempItem.product.price * tempItem.amount) }}
-          </h5>
+          </h4>
         </v-col>
         <v-col cols="2">
           <div class="mr-5 mt-4">
@@ -79,6 +79,6 @@ export default class DrawerRightContent extends Vue {
 
 <style scoped>
 .text-tiny {
-  font-size: 10px;
+  font-size: 12px;
 }
 </style>
