@@ -13,7 +13,7 @@
     </v-app-bar>
     <v-main class="grey lighten-3">
       <v-container>
-        <v-row class="my-3">
+        <v-row v-if="$route.name === 'home'" class="my-3">
           <v-col cols="6" sm="12" md="6"> </v-col>
           <v-col cols="6" sm="12" md="6">
             <v-row>
@@ -59,16 +59,9 @@
           </v-col>
         </v-row>
         <v-row>
-          <v-col class="mt-3" v-if="$vuetify.breakpoint.mdAndUp" cols="2">
-            <main-types-list></main-types-list>
-          </v-col>
-          <v-col class="mt-n15">
-            <v-container fluid>
-              <v-fade-transition mode="out-in">
-                <router-view />
-              </v-fade-transition>
-            </v-container>
-          </v-col>
+          <v-fade-transition mode="out-in">
+            <router-view />
+          </v-fade-transition>
         </v-row>
       </v-container>
     </v-main>
@@ -108,14 +101,12 @@ import DrawerRightContent from '@/layouts/customer/drawer-right/DrawerRightConte
 import NavbarCustomerContent from '@/layouts/customer/navbar/NavbarCustomerContent.vue';
 import DrawerRightHeader from '@/layouts/customer/drawer-right/DrawerRightHeader.vue';
 import DrawerRightFooter from '@/layouts/customer/drawer-right/DrawerRightFooter.vue';
-import MainTypesList from '@/layouts/customer/main/MainTypesList.vue';
 import DrawerRightEmptyContent from '@/layouts/customer/drawer-right/DrawerRightEmptyContent.vue';
 
 const shoppingCart = namespace('shoppingCart');
 @Component({
   components: {
     DrawerRightEmptyContent,
-    MainTypesList,
     DrawerRightFooter,
     DrawerRightHeader,
     NavbarCustomerContent,

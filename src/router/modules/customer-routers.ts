@@ -11,5 +11,15 @@ const customerRouters: Array<RouteConfig> = [
       authorize: [],
     },
   },
+  {
+    path: 'payment',
+    component: () => import('@/views/customer/PaymentView.vue'),
+    name: 'payments',
+    meta: {
+      nameComponent: 'Pagos',
+      requiresAuth: false,
+      authorize: [],
+    },
+  },
 ];
 export default customerRouters;
