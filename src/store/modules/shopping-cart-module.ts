@@ -24,6 +24,12 @@ class ShoppingCartModule extends VuexModule {
   }
 
   @Mutation
+  public resetShoppingCartItems(): void {
+    this._shoppingCartItems = [];
+    window.localStorage.removeItem('shopping-cart-items');
+  }
+
+  @Mutation
   public setShoppingCartItems(cartItem: CartItem): void {
     const existItem = this._shoppingCartItems.find((x) => x.product.id === cartItem.product.id);
     if (existItem) {

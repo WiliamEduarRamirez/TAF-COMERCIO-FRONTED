@@ -1,16 +1,18 @@
 <template>
   <v-container class="py-0 fill-height">
     <img
+      @click="onClickHome"
       alt="logo-unsch"
       :src="require('@/assets/images/logo-unsch.png')"
       style="width: 145px; height: 65px"
     />
-    <template v-if="!$vuetify.breakpoint.smAndDown">
+    <!--    <template v-if="!$vuetify.breakpoint.smAndDown">
       <v-btn small v-for="link in links" :key="link" text>
         {{ link }}
       </v-btn>
-    </template>
-    <template v-else>
+    </template>-->
+    <v-btn @click="onClickHome" class="text-capitalize" text> Inicio </v-btn>
+    <template v-if="$vuetify.breakpoint.smAndDown">
       <v-app-bar-nav-icon @click="handleDrawer"></v-app-bar-nav-icon>
     </template>
     <v-spacer></v-spacer>
@@ -42,6 +44,10 @@ export default class NavbarCustomerContent extends Vue {
 
   @shoppingCart.Getter
   totalItems!: number;
+
+  onClickHome(): void {
+    this.$router.push({ name: 'home' });
+  }
 }
 </script>
 
