@@ -1,5 +1,15 @@
 <template>
-  <home-component></home-component>
+  <div>
+    <home-component v-if="!loading"></home-component>
+    <v-dialog v-model="loading" persistent width="450">
+      <v-card>
+        <v-card-text>
+          <div class="text-subtitle-1 text-center">Cargando Productos...</div>
+          <v-progress-linear color="primary" indeterminate rounded height="6"></v-progress-linear>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
+  </div>
 </template>
 
 <script lang="ts">
@@ -14,6 +24,7 @@ const product = namespace('product');
   components: { HomeComponent },
 })
 export default class Home extends Vue {
+  loading = false;
   @product.Action
   loadProducts!: () => Promise<void>;
 
@@ -29,15 +40,19 @@ export default class Home extends Vue {
   loadTypes!: () => Promise<void>;
 
   async created(): Promise<void> {
-    const pagingParams = new PagingParams(1, 10);
-    this.setPagingParams(pagingParams);
-    await this.loadTypes();
-    const predicateParams: PredicateParams = {
-      predicate: 'isEnable',
-      value: true,
-    };
-    this.setPredicate(predicateParams);
-    await this.loadProducts();
+    if (this.types.length === 0) {
+      this.loading = true;
+      const pagingParams = new PagingParams(1, 10);
+      this.setPagingParams(pagingParams);
+      await this.loadTypes();
+      const predicateParams: PredicateParams = {
+        predicate: 'isEnable',
+        value: true,
+      };
+      this.setPredicate(predicateParams);
+      await this.loadProducts();
+      this.loading = false;
+    }
   }
 }
 </script>

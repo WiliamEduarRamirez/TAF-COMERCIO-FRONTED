@@ -31,11 +31,11 @@ const routes: Array<RouteConfig> = [
     children: [...customerRouters],
   },
   {
-    path: '/login',
-    name: 'login-customer',
-    component: () => import('@/views/customer/Login.vue'),
+    path: '/register',
+    name: 'register-customer',
+    component: () => import('@/views/customer/CustomerRegister.vue'),
     meta: {
-      nameComponent: 'Login customer',
+      nameComponent: 'Register customer',
       requiresAuth: false,
       authorize: [],
     },
@@ -59,7 +59,7 @@ router.beforeEach((to, from, next) => {
       if (authorize.length && !authorize.includes(role)) {
         return next({ path: '/' });
       }
-      if (to.name === 'login-customer' || to.name === 'login-admin') {
+      if (to.name === 'login-admin') {
         if (isLoggedIn && role) {
           if (role === ROLE_ADMIN) {
             next({ name: 'dashboard-admin' });

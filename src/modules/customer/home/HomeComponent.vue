@@ -3,7 +3,7 @@
     <v-col class="mt-3" v-if="$vuetify.breakpoint.mdAndUp" cols="2">
       <home-types-list></home-types-list>
     </v-col>
-    <v-col class="mt-n15">
+    <v-col class="mt-n12">
       <v-container fluid>
         <v-row>
           <v-col v-for="tempProduct in products" :key="tempProduct.id" cols="12" sm="6" md="4">

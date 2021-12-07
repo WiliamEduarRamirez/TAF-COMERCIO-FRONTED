@@ -282,7 +282,6 @@ export default class PaymentForm extends Vue {
         onSubmit: (event: any) => {
           event.preventDefault();
           this.loading = true;
-          /* console.log('entra aqui', this.cardForm.getCardFormData());*/
           const {
             paymentMethodId: payment_method_id,
             issuerId: issuer_id,
@@ -309,6 +308,7 @@ export default class PaymentForm extends Vue {
           paymentsServices.create(processPayment).then(() => {
             this.loading = false;
             this.$router.push({ name: 'home' });
+            this.$toast('Su compra se realizo correctamente');
             this.resetShoppingCartItems();
           });
         },

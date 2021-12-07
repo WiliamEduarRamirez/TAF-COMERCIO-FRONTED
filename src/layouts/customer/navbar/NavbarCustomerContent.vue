@@ -1,5 +1,7 @@
 <template>
   <v-container class="py-0 fill-height">
+    <customer-login-auth ref="customer-login-auth"></customer-login-auth>
+
     <img
       @click="onClickHome"
       alt="logo-unsch"
@@ -20,7 +22,7 @@
       <v-text-field dense flat hide-details rounded solo-inverted></v-text-field>
     </v-responsive>
     <v-spacer></v-spacer>
-    <v-btn class="mr-2" fab color="primary" small>
+    <v-btn class="mr-2" @click="openModalLogin" fab color="primary" small>
       <v-icon>mdi-account</v-icon>
     </v-btn>
     <v-badge offset-x="20" offset-y="15" color="error" :content="totalItems.toString()">
@@ -34,9 +36,11 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
+import CustomerLoginAuth from '@/layouts/customer/auth/CustomerLoginAuth.vue';
 const shoppingCart = namespace('shoppingCart');
-
-@Component
+@Component({
+  components: { CustomerLoginAuth },
+})
 export default class NavbarCustomerContent extends Vue {
   @Prop({ required: true }) handleDrawerRight!: () => void;
   @Prop({ required: true }) handleDrawer!: () => void;
@@ -47,6 +51,11 @@ export default class NavbarCustomerContent extends Vue {
 
   onClickHome(): void {
     this.$router.push({ name: 'home' });
+  }
+
+  openModalLogin(): void {
+    const modal = this.$refs['customer-login-auth'] as Vue & { open: () => void };
+    modal.open();
   }
 }
 </script>
