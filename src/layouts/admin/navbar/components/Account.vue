@@ -8,10 +8,10 @@
 
     <v-list>
       <!--        <div class="hidden-md-and-up">-->
-      <div v-if="getUser">
+      <div v-if="user">
         <v-list-item>
           <v-list-item-title>
-            <strong> {{ getUser.displayName || 'Nombre Usuario' }}</strong>
+            <strong> {{ user.displayName || 'Nombre Usuario' }}</strong>
           </v-list-item-title>
         </v-list-item>
         <v-list-item class="mt-n7">
@@ -47,7 +47,7 @@ export default class Account extends Vue {
   logout!: () => void;
 
   @user.Getter
-  getUser!: User | null;
+  user!: User | null;
 
   @user.Getter
   role!: string | null;

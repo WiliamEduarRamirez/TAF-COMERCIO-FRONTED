@@ -4,28 +4,28 @@ import accountsServices from '@/services/accounts.services';
 
 @Module({ namespaced: true })
 class UserModule extends VuexModule {
-  user: User | null = null;
+  _user: User | null = null;
   loading = true;
 
   get isLoggedIn(): boolean {
-    return !!this.user;
+    return !!this._user;
   }
 
   get appLoading(): boolean {
     return this.loading;
   }
 
-  get getUser(): User | null {
-    return this.user;
+  get user(): User | null {
+    return this._user;
   }
 
   get role(): string | undefined {
-    return this.user?.roles[0];
+    return this._user?.roles[0];
   }
 
   @Mutation
   setUser(user: User | null): void {
-    this.user = user;
+    this._user = user;
   }
 
   @Mutation
@@ -38,7 +38,7 @@ class UserModule extends VuexModule {
     try {
       const token = this.context.rootGetters['auth/getToken'];
       if (token) {
-        if (!this.user) {
+        if (!this._user) {
           const user = await accountsServices.current();
           this.context.commit('setUser', user);
         }

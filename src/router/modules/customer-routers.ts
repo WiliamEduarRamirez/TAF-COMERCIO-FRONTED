@@ -21,5 +21,15 @@ const customerRouters: Array<RouteConfig> = [
       authorize: [],
     },
   },
+  {
+    path: 'login-check',
+    component: () => import('@/views/customer/LoginCheck.vue'),
+    name: 'customer-login-check',
+    meta: {
+      nameComponent: 'login-check',
+      requiresAuth: false,
+      authorize: [],
+    },
+  },
 ];
 export default customerRouters;

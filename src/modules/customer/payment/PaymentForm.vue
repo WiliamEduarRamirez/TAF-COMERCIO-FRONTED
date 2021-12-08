@@ -179,7 +179,9 @@ import { namespace } from 'vuex-class';
 import { MercadoPagoPayment } from '@/models/payment';
 import paymentsServices from '@/services/payments.services';
 import { PUBLIC_KEY_MERCADO_PAGO } from '@/constants/app-constants';
+import { User } from '@/models/user';
 const shoppingCart = namespace('shoppingCart');
+const user = namespace('user');
 
 @Component
 export default class PaymentForm extends Vue {
@@ -206,13 +208,22 @@ export default class PaymentForm extends Vue {
   @shoppingCart.Getter
   totalPrice!: number;
 
+  @user.Getter
+  user!: User | null;
+
   @shoppingCart.Mutation
   resetShoppingCartItems!: () => void;
 
   destroyed(): void {
     this.cardForm.unmount();
   }
+  created(): void {
+    if (!this.user) {
+      this.$router.push({ name: 'home' });
+    }
+  }
   mounted(): void {
+    if (!this.user) return;
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //@ts-ignore
     const mp = new window.MercadoPago(PUBLIC_KEY_MERCADO_PAGO);

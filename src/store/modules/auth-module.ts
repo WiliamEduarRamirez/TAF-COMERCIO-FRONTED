@@ -44,12 +44,13 @@ class AuthModule extends VuexModule {
   @Action({ rawError: true })
   async login(creds: UserFormValues): Promise<void> {
     this.context.commit('setInitialLoading', true);
-
     try {
       const user = await accountsServices.login(creds);
       this.context.commit('setUser', user);
       this.context.commit('setToken', user.token);
-      await router.push({ name: 'dashboard-admin' });
+      if (!creds.isCustomer) {
+        await router.push({ name: 'dashboard-admin' });
+      }
       this.context.commit('setInitialLoading', false);
     } catch (e) {
       this.context.commit('setInitialLoading', false);

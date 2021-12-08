@@ -22,14 +22,23 @@
       <v-text-field dense flat hide-details rounded solo-inverted></v-text-field>
     </v-responsive>
     <v-spacer></v-spacer>
-    <v-btn class="mr-2" @click="openModalLogin" fab color="primary" small>
-      <v-icon>mdi-account</v-icon>
-    </v-btn>
-    <v-badge offset-x="20" offset-y="15" color="error" :content="totalItems.toString()">
-      <v-btn @click.stop="handleDrawerRight" class="mx-2" fab small color="success">
+    <v-badge offset-x="28" offset-y="15" color="error" :content="totalItems.toString()">
+      <v-btn
+        @click.stop="handleDrawerRight"
+        class="mx-4"
+        fab
+        small
+        :color="totalItems === 0 ? '#D7DCE6' : 'success'"
+      >
         <v-icon dark> mdi-cart-variant </v-icon>
       </v-btn>
     </v-badge>
+    <v-btn v-if="!user" @click="openModalLogin" fab color="#D7DCE6" small>
+      <v-icon>mdi-account</v-icon>
+    </v-btn>
+    <v-btn v-else fab color="primary" small>
+      <v-icon>mdi-account</v-icon>
+    </v-btn>
   </v-container>
 </template>
 
@@ -37,7 +46,9 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
 import CustomerLoginAuth from '@/layouts/customer/auth/CustomerLoginAuth.vue';
+import { User } from '@/models/user';
 const shoppingCart = namespace('shoppingCart');
+const user = namespace('user');
 @Component({
   components: { CustomerLoginAuth },
 })
@@ -48,6 +59,9 @@ export default class NavbarCustomerContent extends Vue {
 
   @shoppingCart.Getter
   totalItems!: number;
+
+  @user.Getter
+  user!: User | null;
 
   onClickHome(): void {
     this.$router.push({ name: 'home' });
