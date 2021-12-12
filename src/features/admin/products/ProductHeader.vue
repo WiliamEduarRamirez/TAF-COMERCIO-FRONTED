@@ -26,7 +26,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 import ModalFormProduct from '@/features/admin/products/modals/ModalFormProduct.vue';
 import { Product } from '@/app/models/product';
-import CustomModal from '@/common/custom-modal/CustomModal.vue';
+import CustomModal from '@/app/common/components/custom-modal/CustomModal.vue';
 import { namespace } from 'vuex-class';
 const product = namespace('product');
 @Component({

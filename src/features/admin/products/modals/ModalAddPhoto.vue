@@ -42,7 +42,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { Product } from '@/app/models/product';
-import CustomDropzone from '@/common/custom-dropzone/CustomDropzone.vue';
+import CustomDropzone from '@/app/common/components/custom-dropzone/CustomDropzone.vue';
 import photosServices from '@/app/services/photos-services';
 @Component({
   components: { CustomDropzone },

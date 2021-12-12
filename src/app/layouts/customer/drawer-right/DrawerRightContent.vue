@@ -26,7 +26,7 @@
           <v-img
             contain
             height="60"
-            :src="tempItem.product.photoUrl || require('@/assets/images/unnamed.png')"
+            :src="tempItem.product.photoUrl || require('@/app/assets/images/unnamed.png')"
           >
           </v-img>
         </v-col>

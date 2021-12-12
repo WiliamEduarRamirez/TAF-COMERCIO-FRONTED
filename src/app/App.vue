@@ -25,11 +25,11 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
-import CustomProgressCircular from '@/common/custom-progress-circular/CustomProgressCircular.vue';
+import CustomProgressCircular from '@/app/common/components/custom-progress-circular/CustomProgressCircular.vue';
 
 const user = namespace('user');
 @Component({
-  components: { CustomProgressCircular },
+  components: { CustomProgressCircular }
 })
 export default class App extends Vue {
   @user.Action

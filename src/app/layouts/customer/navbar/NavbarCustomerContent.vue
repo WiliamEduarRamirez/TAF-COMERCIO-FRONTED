@@ -5,7 +5,7 @@
     <img
       @click="onClickHome"
       alt="logo-unsch"
-      :src="require('@/assets/images/logo-unsch.png')"
+      :src="require('@/app/assets/images/logo-unsch.png')"
       style="width: 145px; height: 65px"
     />
     <!--    <template v-if="!$vuetify.breakpoint.smAndDown">

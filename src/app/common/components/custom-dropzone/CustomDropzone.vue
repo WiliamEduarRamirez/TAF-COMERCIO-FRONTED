@@ -25,7 +25,7 @@
 
 <script lang="ts">
 import { Component, Emit, Vue } from 'vue-property-decorator';
-import CustomProgressCircular from '@/common/custom-progress-circular/CustomProgressCircular.vue';
+import CustomProgressCircular from '@/app/common/components/custom-progress-circular/CustomProgressCircular.vue';
 import sleep from '@/app/common/functions/sleep';
 @Component({
   components: { CustomProgressCircular },

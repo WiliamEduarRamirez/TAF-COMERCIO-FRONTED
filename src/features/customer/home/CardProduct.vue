@@ -3,7 +3,7 @@
     <v-img
       contain
       height="200"
-      :src="product.photoUrl || require('@/assets/images/unnamed.png')"
+      :src="product.photoUrl || require('@/app/assets/images/unnamed.png')"
     ></v-img>
 
     <v-card-title>{{ product.denomination }}</v-card-title>

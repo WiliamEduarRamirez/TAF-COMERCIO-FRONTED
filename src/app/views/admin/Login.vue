@@ -6,7 +6,7 @@
         <v-card-title class="d-flex align-center justify-center py-7">
           <router-link to="/" class="d-flex align-center">
             <v-img
-              :src="require('@/assets/images-template/logos/logo.svg')"
+              :src="require('@/app/assets/images-template/logos/logo.svg')"
               max-height="30px"
               max-width="30px"
               alt="logo"
@@ -222,5 +222,5 @@ export default class Login extends Vue {
 </script>
 
 <style lang="scss">
-@import '~@/assets/styles/auth.scss';
+@import '~@/app/assets/styles/auth.scss';
 </style>

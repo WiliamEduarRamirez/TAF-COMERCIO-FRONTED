@@ -112,7 +112,7 @@
 
 <script lang="ts">
 import { Component, Emit, Vue } from 'vue-property-decorator';
-import CustomDropzone from '@/common/custom-dropzone/CustomDropzone.vue';
+import CustomDropzone from '@/app/common/components/custom-dropzone/CustomDropzone.vue';
 import { Product, ProductFormValues } from '@/app/models/product';
 import categoriesServices from '@/app/services/categories.services';
 import typesServices from '@/app/services/types.services';

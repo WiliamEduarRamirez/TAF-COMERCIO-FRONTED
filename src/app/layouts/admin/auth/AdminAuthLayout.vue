@@ -9,7 +9,7 @@
               alt="logo-rimac"
             />-->
           <v-img
-            :src="require('@/assets/images/login/img-portada.jpeg')"
+            :src="require('@/app/assets/images/login/img-portada.jpeg')"
             class="image"
             height="100vh"
           />
@@ -20,7 +20,7 @@
               <v-row>
                 <v-col align="center">
                   <v-img
-                    :src="require('@/assets/images/login/logo-rimac.png')"
+                    :src="require('@/app/assets/images/login/logo-rimac.png')"
                     height="100"
                     width="300"
                   />

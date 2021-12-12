@@ -105,12 +105,12 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import CustomBodyTable from '@/common/custom-body-table/CustomBodyTable.vue';
+import CustomBodyTable from '@/app/common/components/custom-body-table/CustomBodyTable.vue';
 import { Product } from '@/app/models/product';
 import { namespace } from 'vuex-class';
-import CustomProgressCircular from '@/common/custom-progress-circular/CustomProgressCircular.vue';
+import CustomProgressCircular from '@/app/common/components/custom-progress-circular/CustomProgressCircular.vue';
 import ModalAddPhoto from '@/features/admin/products/modals/ModalAddPhoto.vue';
-import CustomMessage from '@/common/custom-messages/CustomMessage.vue';
+import CustomMessage from '@/app/common/components/custom-messages/CustomMessage.vue';
 import ModalChangeProductStatus from '@/features/admin/products/modals/ModalChangeProductStatus.vue';
 const product = namespace('product');
 @Component({
