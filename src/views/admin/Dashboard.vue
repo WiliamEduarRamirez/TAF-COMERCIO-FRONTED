@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import DashboardComponent from '@/modules/admin/dashboard/DashboardComponent.vue';
+import DashboardComponent from '@/features/admin/dashboard/DashboardComponent.vue';
 @Component({
   components: { DashboardComponent },
 })

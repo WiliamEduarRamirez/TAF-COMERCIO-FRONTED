@@ -13,8 +13,8 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
 const product = namespace('product');
-import ProductsTable from '@/modules/admin/products/ProductsTable.vue';
-import ProductPaginate from '@/modules/admin/products/ProductPaginate.vue';
+import ProductsTable from '@/features/admin/products/ProductsTable.vue';
+import ProductPaginate from '@/features/admin/products/ProductPaginate.vue';
 @Component({
   components: { ProductPaginate, ProductsTable },
 })

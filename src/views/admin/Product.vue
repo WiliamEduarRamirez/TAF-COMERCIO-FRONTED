@@ -7,8 +7,8 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import ProductsList from '@/modules/admin/products/ProductsList.vue';
-import ProductHeader from '@/modules/admin/products/ProductHeader.vue';
+import ProductsList from '@/features/admin/products/ProductsList.vue';
+import ProductHeader from '@/features/admin/products/ProductHeader.vue';
 
 @Component({
   components: { ProductHeader, ProductsList },

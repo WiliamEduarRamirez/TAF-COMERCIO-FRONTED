@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import PaymentForm from '@/modules/customer/payment/PaymentForm.vue';
+import PaymentForm from '@/features/customer/payment/PaymentForm.vue';
 @Component({
   components: { PaymentForm },
 })

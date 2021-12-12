@@ -19,7 +19,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
 import { Product } from '@/app/models/product';
-import CardProduct from '@/modules/customer/home/CardProduct.vue';
+import CardProduct from '@/features/customer/home/CardProduct.vue';
 import HomeTypesList from './HomeTypesList.vue';
 
 const product = namespace('product');

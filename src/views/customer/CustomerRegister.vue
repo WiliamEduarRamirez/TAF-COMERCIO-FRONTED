@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import CustomerRegisterAuth from '@/modules/customer/auth/CustomerRegisterAuth.vue';
+import CustomerRegisterAuth from '@/features/customer/auth/CustomerRegisterAuth.vue';
 @Component({
   components: { CustomerRegisterAuth },
 })

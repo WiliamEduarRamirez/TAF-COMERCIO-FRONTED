@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import AuthLoginCheck from '@/modules/customer/auth/AuthLoginCheck.vue';
+import AuthLoginCheck from '@/features/customer/auth/AuthLoginCheck.vue';
 @Component({
   components: { AuthLoginCheck },
 })

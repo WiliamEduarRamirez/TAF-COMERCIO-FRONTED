@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import HomeComponent from '@/modules/customer/home/HomeComponent.vue';
+import HomeComponent from '@/features/customer/home/HomeComponent.vue';
 import { namespace } from 'vuex-class';
 import { Type } from '@/app/models/product';
 import { PagingParams, PredicateParams } from '@/app/models/pagination';
