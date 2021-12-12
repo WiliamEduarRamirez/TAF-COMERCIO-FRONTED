@@ -1,5 +1,5 @@
 import { RouteConfig } from 'vue-router';
-import { ROLE_ADMIN } from '@/helpers/roles';
+import { ROLE_ADMIN } from '@/app/common/helpers/roles';
 
 const adminRouters: Array<RouteConfig> = [
   {

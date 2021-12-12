@@ -3,7 +3,7 @@ import VueRouter, { RouteConfig } from 'vue-router';
 import adminRouters from '@/app/router/modules/admin-routers';
 import customerRouters from '@/app/router/modules/customer-routers';
 import store from '@/app/store';
-import { ROLE_ADMIN } from '@/helpers/roles';
+import { ROLE_ADMIN } from '@/app/common/helpers/roles';
 
 Vue.use(VueRouter);
 
