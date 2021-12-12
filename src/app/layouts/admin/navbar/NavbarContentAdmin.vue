@@ -19,7 +19,7 @@
 <script lang="ts">
 import Component from 'vue-class-component';
 import { Vue } from 'vue-property-decorator';
-import Account from '@/layouts/admin/navbar/components/Account.vue';
+import Account from '@/app/layouts/admin/navbar/components/Account.vue';
 @Component({
   components: { Account },
 })

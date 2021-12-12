@@ -97,11 +97,11 @@ import { Vue } from 'vue-property-decorator';
 import Component from 'vue-class-component';
 
 import { namespace } from 'vuex-class';
-import DrawerRightContent from '@/layouts/customer/drawer-right/DrawerRightContent.vue';
-import NavbarCustomerContent from '@/layouts/customer/navbar/NavbarCustomerContent.vue';
-import DrawerRightHeader from '@/layouts/customer/drawer-right/DrawerRightHeader.vue';
-import DrawerRightFooter from '@/layouts/customer/drawer-right/DrawerRightFooter.vue';
-import DrawerRightEmptyContent from '@/layouts/customer/drawer-right/DrawerRightEmptyContent.vue';
+import DrawerRightContent from '@/app/layouts/customer/drawer-right/DrawerRightContent.vue';
+import NavbarCustomerContent from '@/app/layouts/customer/navbar/NavbarCustomerContent.vue';
+import DrawerRightHeader from '@/app/layouts/customer/drawer-right/DrawerRightHeader.vue';
+import DrawerRightFooter from '@/app/layouts/customer/drawer-right/DrawerRightFooter.vue';
+import DrawerRightEmptyContent from '@/app/layouts/customer/drawer-right/DrawerRightEmptyContent.vue';
 
 const shoppingCart = namespace('shoppingCart');
 @Component({

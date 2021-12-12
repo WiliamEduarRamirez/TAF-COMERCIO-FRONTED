@@ -11,12 +11,12 @@ const routes: Array<RouteConfig> = [
   {
     path: '/admin',
     name: '',
-    component: () => import('@/layouts/admin/AdminLayout.vue'),
+    component: () => import('@/app/layouts/admin/AdminLayout.vue'),
     children: [...adminRouters],
   },
   {
     path: '/admin/login',
-    component: () => import('@/views/admin/Login.vue'),
+    component: () => import('@/app/views/admin/Login.vue'),
     name: 'login-admin',
     meta: {
       nameComponent: 'Login admin',
@@ -27,13 +27,13 @@ const routes: Array<RouteConfig> = [
   {
     path: '/',
     name: '',
-    component: () => import('@/layouts/customer/CustomerLayout.vue'),
+    component: () => import('@/app/layouts/customer/CustomerLayout.vue'),
     children: [...customerRouters],
   },
   {
     path: '/register',
     name: 'register-customer',
-    component: () => import('@/views/customer/CustomerRegister.vue'),
+    component: () => import('@/app/views/customer/CustomerRegister.vue'),
     meta: {
       nameComponent: 'Register customer',
       requiresAuth: false,

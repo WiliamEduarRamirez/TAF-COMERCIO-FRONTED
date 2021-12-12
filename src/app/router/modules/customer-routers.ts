@@ -3,7 +3,7 @@ import { RouteConfig } from 'vue-router';
 const customerRouters: Array<RouteConfig> = [
   {
     path: '',
-    component: () => import('@/views/customer/Home.vue'),
+    component: () => import('@/app/views/customer/Home.vue'),
     name: 'home',
     meta: {
       nameComponent: 'Home',
@@ -13,7 +13,7 @@ const customerRouters: Array<RouteConfig> = [
   },
   {
     path: 'payment',
-    component: () => import('@/views/customer/PaymentView.vue'),
+    component: () => import('@/app/views/customer/PaymentView.vue'),
     name: 'payments',
     meta: {
       nameComponent: 'Pagos',
@@ -23,7 +23,7 @@ const customerRouters: Array<RouteConfig> = [
   },
   {
     path: 'login-check',
-    component: () => import('@/views/customer/LoginCheck.vue'),
+    component: () => import('@/app/views/customer/LoginCheck.vue'),
     name: 'customer-login-check',
     meta: {
       nameComponent: 'login-check',

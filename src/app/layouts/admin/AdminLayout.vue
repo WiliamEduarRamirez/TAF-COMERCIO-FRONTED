@@ -40,8 +40,8 @@
 <script lang="ts">
 import Component from 'vue-class-component';
 import { Vue } from 'vue-property-decorator';
-import SidebarContent from '@/layouts/admin/sidebar/SidebarContent.vue';
-import NavbarContentAdmin from '@/layouts/admin/navbar/NavbarContentAdmin.vue';
+import SidebarContent from '@/app/layouts/admin/sidebar/SidebarContent.vue';
+import NavbarContentAdmin from '@/app/layouts/admin/navbar/NavbarContentAdmin.vue';
 @Component({
   components: { NavbarContentAdmin, SidebarContent },
 })

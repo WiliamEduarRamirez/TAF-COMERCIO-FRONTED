@@ -45,7 +45,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
-import CustomerLoginAuth from '@/layouts/customer/auth/CustomerLoginAuth.vue';
+import CustomerLoginAuth from '@/app/layouts/customer/auth/CustomerLoginAuth.vue';
 import { User } from '@/app/models/user';
 const shoppingCart = namespace('shoppingCart');
 const user = namespace('user');

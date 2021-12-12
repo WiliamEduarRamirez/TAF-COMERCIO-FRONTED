@@ -4,7 +4,7 @@ import { ROLE_ADMIN } from '@/app/common/helpers/roles';
 const adminRouters: Array<RouteConfig> = [
   {
     path: 'dashboard',
-    component: () => import('@/views/admin/Dashboard.vue'),
+    component: () => import('@/app/views/admin/Dashboard.vue'),
     name: 'dashboard-admin',
     meta: {
       nameComponent: 'Dashboard',
@@ -14,7 +14,7 @@ const adminRouters: Array<RouteConfig> = [
   },
   {
     path: 'products',
-    component: () => import('@/views/admin/Product.vue'),
+    component: () => import('@/app/views/admin/Product.vue'),
     name: 'products',
     meta: {
       nameComponent: 'Productos',
