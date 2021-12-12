@@ -103,8 +103,8 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
 import { UserFormValues } from '@/models/user';
-import { REGEX_VALID_EMAIL } from '@/constants/validations-config';
 import { AxiosError } from 'axios';
+import { REGEX_VALID_EMAIL } from '@/app/common/constants/validations-config';
 
 const auth = namespace('auth');
 

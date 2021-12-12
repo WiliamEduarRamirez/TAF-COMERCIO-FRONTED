@@ -137,10 +137,10 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import { REGEX_VALID_EMAIL } from '@/constants/validations-config';
 import { UserFormValues } from '@/models/user';
 import { AxiosError } from 'axios';
 import { namespace } from 'vuex-class';
+import { REGEX_VALID_EMAIL } from '@/app/common/constants/validations-config';
 const auth = namespace('auth');
 
 const valueForm: UserFormValues = {
