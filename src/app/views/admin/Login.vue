@@ -112,7 +112,9 @@
       class="auth-mask-bg"
       height="173"
       :src="
-        require(`@/assets/images-template/misc/mask-${$vuetify.theme.dark ? 'dark' : 'light'}.png`)
+        require(`@/app/assets/images-template/misc/mask-${
+          $vuetify.theme.dark ? 'dark' : 'light'
+        }.png`)
       "
       alt="mask"
     />
@@ -122,7 +124,7 @@
       class="auth-tree"
       width="247"
       height="185"
-      src="@/assets/images-template/misc/tree.png"
+      src="@/app/assets/images-template/misc/tree.png"
     ></v-img>
 
     <!-- tree  -->
@@ -130,7 +132,7 @@
       class="auth-tree-3"
       width="377"
       height="289"
-      src="@/assets/images-template/misc/tree-3.png"
+      src="@/app/assets/images-template/misc/tree-3.png"
     ></v-img>
   </div>
 </template>
@@ -145,7 +147,7 @@ const auth = namespace('auth');
 
 const valueForm: UserFormValues = {
   email: 'admin@gmail.com',
-  password: 'P@ssword1998',
+  password: 'P@ssword1998'
 };
 
 @Component
@@ -157,8 +159,8 @@ export default class Login extends Vue {
     required: (v: string): any => !!v || 'La contraseña es requerida',
     email: [
       (v: string): any => !!v || 'Correo electrónico es requerido',
-      (v: string): any => REGEX_VALID_EMAIL.test(v) || 'Formato de correo electrónico no válido',
-    ],
+      (v: string): any => REGEX_VALID_EMAIL.test(v) || 'Formato de correo electrónico no válido'
+    ]
   };
   form = { ...valueForm };
   loading = false;
@@ -166,23 +168,23 @@ export default class Login extends Vue {
     {
       icon: 'mdi-facebook',
       color: '#4267b2',
-      colorInDark: '#4267b2',
+      colorInDark: '#4267b2'
     },
     {
       icon: 'mdi-twitter',
       color: '#1da1f2',
-      colorInDark: '#1da1f2',
+      colorInDark: '#1da1f2'
     },
     {
       icon: 'mdi-github',
       color: '#272727',
-      colorInDark: '#fff',
+      colorInDark: '#fff'
     },
     {
       icon: 'mdi-google',
       color: '#db4437',
-      colorInDark: '#db4437',
-    },
+      colorInDark: '#db4437'
+    }
   ];
 
   created(): void {

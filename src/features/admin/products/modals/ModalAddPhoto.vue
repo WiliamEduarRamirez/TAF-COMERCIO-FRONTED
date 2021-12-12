@@ -40,12 +40,12 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Emit, Vue } from 'vue-property-decorator';
 import { Product } from '@/app/models/product';
 import CustomDropzone from '@/app/common/components/custom-dropzone/CustomDropzone.vue';
 import photosServices from '@/app/services/photos-services';
 @Component({
-  components: { CustomDropzone },
+  components: { CustomDropzone }
 })
 export default class ProductsList extends Vue {
   loading = false;
@@ -54,7 +54,7 @@ export default class ProductsList extends Vue {
   product: Product | null = null;
   file: File | null = null;
 
-  open(product: Product): void {
+  open(product: Product | null): void {
     if (product) {
       this.dialog = true;
       this.product = product;
@@ -73,6 +73,10 @@ export default class ProductsList extends Vue {
     this.file = null;
   }
 
+  @Emit('successful')
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  successful(): void {}
+
   async uploadPhoto(): Promise<void> {
     this.loading = true;
     try {
@@ -82,6 +86,7 @@ export default class ProductsList extends Vue {
         };
         await photosServices.add(this.file, this.product.id);
         this.$toast.success('La foto se agrego correctamente');
+        this.successful();
         this.close();
         dropzone.resetValues();
       }
