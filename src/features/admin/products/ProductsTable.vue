@@ -43,12 +43,12 @@
                     <v-tooltip top>
                       <template v-slot:activator="{ on, attrs }">
                         <span v-bind="attrs" v-on="on">
-                          <v-btn color="primary" @click="() => openModalAddPhoto(tempProduct)" icon>
-                            <v-icon>mdi-camera</v-icon>
+                          <v-btn color="primary" @click="() => redirectPhotos(tempProduct)" icon>
+                            <v-icon>mdi-image-multiple</v-icon>
                           </v-btn>
                         </span>
                       </template>
-                      <span>Agregar Foto</span>
+                      <span>Fotos</span>
                     </v-tooltip>
                     <v-tooltip top>
                       <template v-slot:activator="{ on, attrs }">
@@ -119,8 +119,8 @@ const product = namespace('product');
     CustomMessage,
     ModalAddPhoto,
     CustomProgressCircular,
-    CustomBodyTable,
-  },
+    CustomBodyTable
+  }
 })
 export default class ProductsList extends Vue {
   @product.Getter
@@ -154,6 +154,10 @@ export default class ProductsList extends Vue {
   openModalAddPhoto(product: Product): void {
     const modal = this.$refs['modal-add-photo'] as Vue & { open: (product: Product) => void };
     modal.open(product);
+  }
+
+  redirectPhotos(product: Product): void {
+    this.$router.push({ path: `/admin/products/${product.id}/photos` });
   }
 
   openModalChangeProductStatus(product: Product): void {

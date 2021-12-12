@@ -9,18 +9,28 @@ const adminRouters: Array<RouteConfig> = [
     meta: {
       nameComponent: 'Dashboard',
       requiresAuth: true,
-      authorize: [ROLE_ADMIN],
-    },
+      authorize: [ROLE_ADMIN]
+    }
   },
   {
     path: 'products',
-    component: () => import('@/app/views/admin/Product.vue'),
+    component: () => import('@/app/views/admin/ProductView.vue'),
     name: 'products',
     meta: {
       nameComponent: 'Productos',
       requiresAuth: true,
-      authorize: [ROLE_ADMIN],
-    },
+      authorize: [ROLE_ADMIN]
+    }
   },
+  {
+    path: 'products/:id/photos',
+    component: () => import('@/app/views/admin/ProductPhotosView.vue'),
+    name: 'product-photos',
+    meta: {
+      nameComponent: 'Fotos Productos',
+      requiresAuth: true,
+      authorize: [ROLE_ADMIN]
+    }
+  }
 ];
 export default adminRouters;

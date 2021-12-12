@@ -11,9 +11,9 @@ import ProductsList from '@/features/admin/products/ProductsList.vue';
 import ProductHeader from '@/features/admin/products/ProductHeader.vue';
 
 @Component({
-  components: { ProductHeader, ProductsList },
+  components: { ProductHeader, ProductsList }
 })
-export default class Product extends Vue {}
+export default class ProductView extends Vue {}
 </script>
 
 <style scoped></style>
