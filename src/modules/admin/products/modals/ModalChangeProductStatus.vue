@@ -33,8 +33,8 @@
 
 <script lang="ts">
 import { Component, Emit, Vue } from 'vue-property-decorator';
-import productsServices from '@/services/products.services';
-import { Product } from '@/models/product';
+import productsServices from '@/app/services/products.services';
+import { Product } from '@/app/models/product';
 
 @Component
 export default class ModalChangeProductStatus extends Vue {

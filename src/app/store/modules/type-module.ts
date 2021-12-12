@@ -1,6 +1,6 @@
 import { Action, Module, Mutation, VuexModule } from 'vuex-module-decorators';
-import { Type } from '@/models/product';
-import typesServices from '@/services/types.services';
+import { Type } from '@/app/models/product';
+import typesServices from '@/app/services/types.services';
 
 @Module({ namespaced: true })
 class TypeModule extends VuexModule {

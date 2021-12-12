@@ -1,6 +1,6 @@
 import { Action, Module, Mutation, VuexModule } from 'vuex-module-decorators';
-import { CartItem } from '@/models/shopping-cart';
-import { Product } from '@/models/product';
+import { CartItem } from '@/app/models/shopping-cart';
+import { Product } from '@/app/models/product';
 
 @Module({ namespaced: true })
 class ShoppingCartModule extends VuexModule {

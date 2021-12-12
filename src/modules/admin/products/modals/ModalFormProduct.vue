@@ -113,10 +113,10 @@
 <script lang="ts">
 import { Component, Emit, Vue } from 'vue-property-decorator';
 import CustomDropzone from '@/common/custom-dropzone/CustomDropzone.vue';
-import { Product, ProductFormValues } from '@/models/product';
-import categoriesServices from '@/services/categories.services';
-import typesServices from '@/services/types.services';
-import productsServices from '@/services/products.services';
+import { Product, ProductFormValues } from '@/app/models/product';
+import categoriesServices from '@/app/services/categories.services';
+import typesServices from '@/app/services/types.services';
+import productsServices from '@/app/services/products.services';
 
 interface Item {
   text: string;

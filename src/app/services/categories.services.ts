@@ -1,5 +1,5 @@
-import { Category } from '@/models/product';
-import request from '@/api/api';
+import { Category } from '@/app/models/product';
+import request from '@/app/api/api';
 
 const categoriesServices = {
   list: (typeId: string): Promise<Category[]> =>

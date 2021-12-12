@@ -1,6 +1,6 @@
 import { Action, Module, Mutation, VuexModule } from 'vuex-module-decorators';
-import { Category } from '@/models/product';
-import categoriesServices from '@/services/categories.services';
+import { Category } from '@/app/models/product';
+import categoriesServices from '@/app/services/categories.services';
 
 @Module({ namespaced: true })
 class CategoryModule extends VuexModule {

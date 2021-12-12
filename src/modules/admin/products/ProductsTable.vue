@@ -106,7 +106,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import CustomBodyTable from '@/common/custom-body-table/CustomBodyTable.vue';
-import { Product } from '@/models/product';
+import { Product } from '@/app/models/product';
 import { namespace } from 'vuex-class';
 import CustomProgressCircular from '@/common/custom-progress-circular/CustomProgressCircular.vue';
 import ModalAddPhoto from '@/modules/admin/products/modals/ModalAddPhoto.vue';

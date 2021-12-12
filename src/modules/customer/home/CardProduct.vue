@@ -49,7 +49,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import { Product } from '@/models/product';
+import { Product } from '@/app/models/product';
 import { namespace } from 'vuex-class';
 
 const shoppingCart = namespace('shoppingCart');

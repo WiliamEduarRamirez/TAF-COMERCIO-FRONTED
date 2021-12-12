@@ -46,7 +46,7 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
 import CustomerLoginAuth from '@/layouts/customer/auth/CustomerLoginAuth.vue';
-import { User } from '@/models/user';
+import { User } from '@/app/models/user';
 const shoppingCart = namespace('shoppingCart');
 const user = namespace('user');
 @Component({

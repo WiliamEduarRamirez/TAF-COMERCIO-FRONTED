@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
-import sleep from "@/functions/sleep";
-import store from "@/store/index";
-import { PaginatedResult } from "@/models/pagination";
+import sleep from "@/app/common/functions/sleep";
+import store from "@/app/store";
+import { PaginatedResult } from "@/app/models/pagination";
 import { BASE_URL } from "@/app/common/constants/constants.app";
 
 /*Start - Config vue-toastification*/

@@ -269,11 +269,11 @@
 <script lang="ts">
 import { Component } from "vue-property-decorator";
 import { namespace } from "vuex-class";
-import { MercadoPagoPayment } from "@/models/payment";
-import paymentsServices from "@/services/payments.services";
-import { User } from "@/models/user";
-import sleep from "@/functions/sleep";
-import Formats from "@/mixins/formats";
+import { MercadoPagoPayment } from "@/app/models/payment";
+import paymentsServices from "@/app/services/payments.services";
+import { User } from "@/app/models/user";
+import sleep from "@/app/common/functions/sleep";
+import Formats from "@/app/common/mixins/formats";
 import { PUBLIC_KEY_CULQI, PUBLIC_KEY_MERCADO_PAGO } from '@/app/common/constants/constants.app';
 const shoppingCart = namespace("shoppingCart");
 const user = namespace("user");

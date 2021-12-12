@@ -1,6 +1,6 @@
-import request from '@/api/api';
-import { PaginatedResult } from '@/models/pagination';
-import { Product, ProductFormValues } from '@/models/product';
+import request from '@/app/api/api';
+import { PaginatedResult } from '@/app/models/pagination';
+import { Product, ProductFormValues } from '@/app/models/product';
 
 const productsServices = {
   list: (params: URLSearchParams): Promise<PaginatedResult<Product[]>> =>

@@ -1,6 +1,6 @@
 import { Action, Module, Mutation, VuexModule } from 'vuex-module-decorators';
-import { User } from '@/models/user';
-import accountsServices from '@/services/accounts.services';
+import { User } from '@/app/models/user';
+import accountsServices from '@/app/services/accounts.services';
 
 @Module({ namespaced: true })
 class UserModule extends VuexModule {

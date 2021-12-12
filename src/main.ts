@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import App from './App.vue';
-import router from './router';
-import store from './store';
+import router from './app/router';
+import store from './app/store';
 import vuetify from './plugins/vuetify';
 
 Vue.config.productionTip = false;
@@ -15,8 +15,8 @@ const options = {
 };
 Vue.use(Toast, options);
 
-import mixinFormat from '@/mixins/formats';
-import mixinFormatValidation from '@/mixins/form-validation';
+import mixinFormat from '@/app/common/mixins/formats';
+import mixinFormatValidation from '@/app/common/mixins/form-validation';
 
 Vue.mixin(mixinFormat);
 Vue.mixin(mixinFormatValidation);

@@ -20,7 +20,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import { Type } from '@/models/product';
+import { Type } from '@/app/models/product';
 import { namespace } from 'vuex-class';
 const type = namespace('type');
 @Component

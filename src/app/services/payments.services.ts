@@ -1,5 +1,5 @@
-import request from '@/api/api';
-import { MercadoPagoPayment } from '@/models/payment';
+import request from '@/app/api/api';
+import { MercadoPagoPayment } from '@/app/models/payment';
 
 const paymentsServices = {
   create: (processPayment: MercadoPagoPayment): Promise<void> =>

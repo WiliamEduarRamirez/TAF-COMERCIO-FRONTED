@@ -41,9 +41,9 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import { Product } from '@/models/product';
+import { Product } from '@/app/models/product';
 import CustomDropzone from '@/common/custom-dropzone/CustomDropzone.vue';
-import photosServices from '@/services/photos-services';
+import photosServices from '@/app/services/photos-services';
 @Component({
   components: { CustomDropzone },
 })

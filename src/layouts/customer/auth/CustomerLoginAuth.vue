@@ -102,7 +102,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
-import { UserFormValues } from '@/models/user';
+import { UserFormValues } from '@/app/models/user';
 import { AxiosError } from 'axios';
 import { REGEX_VALID_EMAIL } from '@/app/common/constants/validations-config';
 

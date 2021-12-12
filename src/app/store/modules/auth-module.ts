@@ -1,7 +1,7 @@
 import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators';
-import { User, UserFormValues } from '@/models/user';
-import accountsServices from '@/services/accounts.services';
-import router from '@/router/index';
+import { User, UserFormValues } from '@/app/models/user';
+import accountsServices from '@/app/services/accounts.services';
+import router from '@/app/router';
 
 @Module({ namespaced: true })
 class AuthModule extends VuexModule {

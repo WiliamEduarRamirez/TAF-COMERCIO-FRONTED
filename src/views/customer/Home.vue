@@ -16,8 +16,8 @@
 import { Component, Vue } from 'vue-property-decorator';
 import HomeComponent from '@/modules/customer/home/HomeComponent.vue';
 import { namespace } from 'vuex-class';
-import { Type } from '@/models/product';
-import { PagingParams, PredicateParams } from '@/models/pagination';
+import { Type } from '@/app/models/product';
+import { PagingParams, PredicateParams } from '@/app/models/pagination';
 const type = namespace('type');
 const product = namespace('product');
 @Component({

@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
-import adminRouters from '@/router/modules/admin-routers';
-import customerRouters from '@/router/modules/customer-routers';
-import store from '@/store/index';
+import adminRouters from '@/app/router/modules/admin-routers';
+import customerRouters from '@/app/router/modules/customer-routers';
+import store from '@/app/store';
 import { ROLE_ADMIN } from '@/helpers/roles';
 
 Vue.use(VueRouter);

@@ -13,7 +13,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
-import { Pagination } from '@/models/pagination';
+import { Pagination } from '@/app/models/pagination';
 const product = namespace('product');
 @Component
 export default class ProductPaginate extends Vue {

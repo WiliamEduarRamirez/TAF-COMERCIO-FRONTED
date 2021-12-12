@@ -10,7 +10,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
-import { User } from '@/models/user';
+import { User } from '@/app/models/user';
 const shoppingCart = namespace('shoppingCart');
 const user = namespace('user');
 

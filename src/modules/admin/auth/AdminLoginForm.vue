@@ -72,7 +72,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import { UserFormValues } from '@/models/user';
+import { UserFormValues } from '@/app/models/user';
 import { namespace } from 'vuex-class';
 import { AxiosError } from 'axios';
 import { REGEX_VALID_EMAIL } from '@/app/common/constants/validations-config';

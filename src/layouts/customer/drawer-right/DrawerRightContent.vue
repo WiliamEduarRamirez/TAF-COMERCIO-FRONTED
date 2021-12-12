@@ -55,7 +55,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
-import { CartItem } from '@/models/shopping-cart';
+import { CartItem } from '@/app/models/shopping-cart';
 const shoppingCart = namespace('shoppingCart');
 @Component
 export default class DrawerRightContent extends Vue {

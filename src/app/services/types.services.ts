@@ -1,5 +1,5 @@
-import { Type } from '@/models/product';
-import request from '@/api/api';
+import { Type } from '@/app/models/product';
+import request from '@/app/api/api';
 
 const typesServices = {
   list: (): Promise<Type[]> => request.get<Type[]>('/types'),

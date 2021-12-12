@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { Photo } from '@/models/photo';
+import { Photo } from '@/app/models/photo';
 
 const photosServices = {
   add: (file: File, productId: string): Promise<Photo> => {

@@ -1,7 +1,7 @@
 import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators';
-import { Pagination, PagingParams, PredicateParams } from '@/models/pagination';
-import productsServices from '@/services/products.services';
-import { Product } from '@/models/product';
+import { Pagination, PagingParams, PredicateParams } from '@/app/models/pagination';
+import productsServices from '@/app/services/products.services';
+import { Product } from '@/app/models/product';
 
 @Module({ namespaced: true })
 class ProductModule extends VuexModule {
