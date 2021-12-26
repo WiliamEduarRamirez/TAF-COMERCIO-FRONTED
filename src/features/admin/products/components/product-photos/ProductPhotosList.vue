@@ -27,7 +27,13 @@
                       class="d-flex flex-row justify-center align-center"
                       style="margin-top: 100px; margin-left: 130px"
                     >
-                      <v-btn :disabled="tempPhoto.isMain" x-small color="success" fab>
+                      <v-btn
+                        @click="openModalSetMainPhoto(tempPhoto)"
+                        :disabled="tempPhoto.isMain"
+                        x-small
+                        color="success"
+                        fab
+                      >
                         <v-icon>mdi-check</v-icon>
                       </v-btn>
                       <v-btn :disabled="tempPhoto.isMain" x-small color="error" class="ml-3" fab>
@@ -55,6 +61,7 @@
         </v-card-text>
       </v-card>
     </v-col>
+    <modal-set-main-photo ref="modal-set-main-photo"></modal-set-main-photo>
   </v-row>
 </template>
 
@@ -64,9 +71,10 @@ import { namespace } from 'vuex-class';
 import { Product } from '@/app/models/product';
 import { Photo } from '@/app/models/photo';
 import CustomProgressCircular from '@/app/common/components/custom-progress-circular/CustomProgressCircular.vue';
+import ModalSetMainPhoto from '@/features/admin/products/components/product-photos/modals/ModalSetMainPhoto.vue';
 const product = namespace('product');
 @Component({
-  components: { CustomProgressCircular }
+  components: { ModalSetMainPhoto, CustomProgressCircular }
 })
 export default class ProductPhotosList extends Vue {
   @product.Getter
@@ -86,6 +94,13 @@ export default class ProductPhotosList extends Vue {
     if (productId) {
       this.loadCurrentProductPhotos(productId);
     }
+  }
+
+  openModalSetMainPhoto(photo: Photo): void {
+    const modal = this.$refs['modal-set-main-photo'] as Vue & {
+      open: (photo: Photo) => void;
+    };
+    modal.open(photo);
   }
 }
 </script>

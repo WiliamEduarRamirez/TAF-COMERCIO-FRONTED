@@ -1,4 +1,3 @@
-import axios, { AxiosResponse } from 'axios';
 import { Photo } from '@/app/models/photo';
 import request from '@/app/api/api';
 
@@ -7,12 +6,10 @@ const photosServices = {
     const formData = new FormData();
     formData.append('File', file);
     formData.append('ProductId', productId);
-    return axios
-      .post<Photo>('/photos', formData, {
-        headers: { 'Content-type': 'multipart/form-data' }
-      })
-      .then((response: AxiosResponse<Photo>) => response.data);
+    return request.postFormData('/photos', formData);
   },
+  setMain: (photoId: string, productId: string): Promise<void> =>
+    request.post<void>(`/photos/${photoId}/setMain`, { productId }),
   listOfProducts: (productId: string): Promise<Photo[]> =>
     request.get<Photo[]>(`/photos/products/${productId}`)
 };

@@ -25,9 +25,9 @@
             </thead>
             <tbody>
               <tr v-for="(tempProduct, index) in products" :key="index">
-                <td class="text-center">{{ tempProduct.code }}</td>
+                <td class="text-center" style="min-width: 140px">{{ tempProduct.code }}</td>
                 <td class="text-center">{{ formatDateLocal(tempProduct.createdAt) }}</td>
-                <td class="text-center">{{ tempProduct.denomination }}</td>
+                <td class="text-center" style="min-width: 150px">{{ tempProduct.denomination }}</td>
                 <td class="text-center">{{ tempProduct.price }}</td>
                 <td class="text-center">{{ tempProduct.cost }}</td>
                 <td class="text-center">{{ tempProduct.type.denomination }}</td>
@@ -90,7 +90,7 @@
             </tbody>
           </template>
         </v-simple-table>
-        <div class="text-center" style="margin-top: 220px" v-else>
+        <div class="text-center" style="margin-top: 200px" v-else>
           <custom-progress-circular></custom-progress-circular>
         </div>
         <custom-message
