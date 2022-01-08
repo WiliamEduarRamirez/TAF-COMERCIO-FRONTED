@@ -6,10 +6,10 @@ import { TypeModel } from '@/app/models/type';
 
 @Module({ namespaced: true })
 class TypeModule extends VuexModule {
-  _pagination: Pagination | null = null;
   _types: TypeModel[] = [];
-  _query = '';
   _initialLoading = false;
+  _pagination: Pagination | null = null;
+  _query = '';
   _searchMode = false;
   _predicate = new Map();
   _pagingParams = new PagingParams(1, 8);
@@ -34,6 +34,7 @@ class TypeModule extends VuexModule {
   get initialLoading(): boolean {
     return this._initialLoading;
   }
+
   get searchMode(): boolean {
     return this._searchMode;
   }
@@ -105,14 +106,17 @@ class TypeModule extends VuexModule {
   @Action({ rawError: true })
   async loadTypes(): Promise<void> {
     this.context.commit('setInitialLoading', true);
+    this.context.commit('setDefaultError');
     try {
       const result = await typesServices.list(this.axiosParams);
       this.context.commit('setTypes', result.data);
       this.context.commit('setPagination', result.pagination);
       this.context.commit('setInitialLoading', false);
-    } catch (e) {
+    } catch (error) {
+      const errorHandler = new ErrorHandler(error);
+      this.context.commit('setError', errorHandler);
+    } finally {
       this.context.commit('setInitialLoading', false);
-      throw e;
     }
   }
 

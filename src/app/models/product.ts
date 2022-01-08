@@ -1,4 +1,5 @@
 import { TypeModel } from '@/app/models/type';
+import { Category } from '@/app/models/category';
 
 export interface Product {
   id: string;
@@ -18,14 +19,6 @@ export interface Product {
   category: Category;
 }
 
-export interface Category {
-  id: string;
-  denomination: string;
-  description: string;
-  state: boolean;
-  createdAt: string;
-  updatedAt: string;
-}
 
 export class ProductFormValues {
   id?: string = undefined;

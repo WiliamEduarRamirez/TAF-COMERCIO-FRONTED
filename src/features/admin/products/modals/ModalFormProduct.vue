@@ -114,7 +114,7 @@
 import { Component, Emit, Mixins, Vue } from 'vue-property-decorator';
 import CustomDropzone from '@/app/common/components/custom-dropzone/CustomDropzone.vue';
 import { Product, ProductFormValues } from '@/app/models/product';
-import categoriesServices from '@/app/services/categories.services';
+/*import categoriesServices from '@/app/services/categories.services';*/
 import typesServices from '@/app/services/types.services';
 import productsServices from '@/app/services/products.services';
 import { PagingParams } from '@/app/models/pagination';
@@ -156,7 +156,7 @@ export default class ProductsList extends Mixins(FormValidationMixin) {
         typeId: product.type.id
       };
       this.productFormValues = new ProductFormValues(productForm as ProductFormValues);
-      this.listCategories(this.productFormValues.typeId);
+      /* this.listCategories(this.productFormValues.typeId);*/
     }
   }
 
@@ -184,7 +184,7 @@ export default class ProductsList extends Mixins(FormValidationMixin) {
   onChangeType(): void {
     this.categoriesItems = [];
     this.productFormValues.categoryId = '';
-    this.listCategories(this.productFormValues.typeId);
+    /*  this.listCategories(this.productFormValues.typeId);*/
   }
 
   editProduct(): void {
@@ -196,16 +196,16 @@ export default class ProductsList extends Mixins(FormValidationMixin) {
     });
   }
 
-  listCategories(typeId: string): void {
+  listCategories(): void {
     this.loadingCategories = true;
-    categoriesServices
+    /*categoriesServices
       .list(typeId)
       .then(res => {
         this.categoriesItems = res.map(x => ({ text: x.denomination, value: x.id }));
       })
       .finally(() => {
         this.loadingCategories = false;
-      });
+      });*/
   }
   listTypes(): void {
     this.loadingTypes = true;

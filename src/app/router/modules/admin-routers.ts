@@ -41,6 +41,16 @@ const adminRouters: Array<RouteConfig> = [
       requiresAuth: true,
       authorize: [ROLE_ADMIN]
     }
+  },
+  {
+    path: 'types/:id/categories',
+    component: () => import('@/app/views/admin/categories-view/CategoriesView.vue'),
+    name: 'categories',
+    meta: {
+      nameComponent: 'Categorias',
+      requiresAuth: true,
+      authorize: [ROLE_ADMIN]
+    }
   }
 ];
 export default adminRouters;

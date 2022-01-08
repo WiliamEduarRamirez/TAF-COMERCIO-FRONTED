@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-simple-table v-if="types.length > 0" fixed-header height="450px">
+    <v-simple-table v-if="categories.length > 0" fixed-header height="450px">
       <template v-slot:default>
         <thead>
           <tr>
@@ -12,19 +12,19 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="tempType in types" :key="tempType._id">
+          <tr v-for="tempCategory in categories" :key="tempCategory.id">
             <td class="text-center">
-              {{ formatDateLocal(tempType.createdAt) }}
+              {{ formatDateLocal(tempCategory.createdAt) }}
             </td>
             <td class="text-center" style="min-width: 150px">
-              {{ isNull(tempType.denomination) }}
+              {{ isNull(tempCategory.denomination) }}
             </td>
             <td class="text-center" style="min-width: 200px">
-              {{ isNull(tempType.description) }}
+              {{ isNull(tempCategory.description) }}
             </td>
             <td class="text-center">
-              <v-btn :color="tempType.state ? 'success' : 'error'" x-small>
-                {{ tempType.state ? 'Habilitado' : 'Deshabilitado' }}
+              <v-btn :color="tempCategory.state ? 'success' : 'error'" x-small>
+                {{ tempCategory.state ? 'Habilitado' : 'Deshabilitado' }}
               </v-btn>
             </td>
             <td style="min-width: 150px" class="text-center">
@@ -32,17 +32,7 @@
                 <v-tooltip top>
                   <template v-slot:activator="{ on, attrs }">
                     <span v-bind="attrs" v-on="on">
-                      <v-btn @click="redirectCategories(tempType)" small icon>
-                        <v-icon color="primary">mdi-book-multiple</v-icon>
-                      </v-btn>
-                    </span>
-                  </template>
-                  <span>Categorías</span>
-                </v-tooltip>
-                <v-tooltip top>
-                  <template v-slot:activator="{ on, attrs }">
-                    <span v-bind="attrs" v-on="on">
-                      <v-btn @click="openModalFormType(tempType)" small icon>
+                      <v-btn @click="openModalFormCategory(tempCategory)" small icon>
                         <v-icon color="warning">mdi-pencil</v-icon>
                       </v-btn>
                     </span>
@@ -53,14 +43,14 @@
                   <template v-slot:activator="{ on, attrs }">
                     <span v-bind="attrs" v-on="on">
                       <v-btn
-                        @click="openModalChangeStatus(tempType)"
+                        @click="openModalChangeStatus(tempCategory)"
                         small
                         icon
-                        :color="!tempType.state ? 'success' : 'error'"
+                        :color="!tempCategory.state ? 'success' : 'error'"
                       >
                         <v-icon>
                           {{
-                            tempType.state
+                            tempCategory.state
                               ? 'mdi-close-circle-outline'
                               : 'mdi-checkbox-marked-circle-outline'
                           }}
@@ -68,7 +58,7 @@
                       </v-btn>
                     </span>
                   </template>
-                  <span>{{ tempType.state ? 'Deshabilitar' : 'Habilitar' }}</span>
+                  <span>{{ tempCategory.state ? 'Deshabilitar' : 'Habilitar' }}</span>
                 </v-tooltip>
               </div>
             </td>
@@ -77,11 +67,11 @@
       </template>
     </v-simple-table>
     <div
-      v-if="types.length === 0 && !searchMode"
+      v-if="categories.length === 0 && !searchMode"
       class="d-flex align-center justify-center flex-column"
       style="height: 65vh"
     >
-      <custom-message message="No dispone de ningún tipo en este momento"></custom-message>
+      <custom-message message="No dispone de ninguna categoria en este momento"></custom-message>
     </div>
     <!--    <custom-modal-change-status
       @action-modal="changeStatus"
@@ -93,43 +83,39 @@
 <script lang="ts">
 import { Component, Mixins, Vue } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
-import { TypeModel } from '@/app/models/type';
 import CustomMessage from '@/app/common/components/custom-messages/CustomMessage.vue';
 import FormatMixin from '@/app/common/mixins/formatMixin';
-const type = namespace('type');
+import { Category } from '@/app/models/category';
+const category = namespace('category');
 @Component({
   components: { CustomMessage }
 })
-export default class TypesTable extends Mixins(FormatMixin) {
-  type: TypeModel | null = null;
+export default class CategoriesTable extends Mixins(FormatMixin) {
+  category: Category | null = null;
   modalChangeStatusRef: any = null;
   /******************* Start - Vuex *******************/
-  @type.Getter
-  types!: TypeModel[];
-  @type.Getter
-  modalFormTypeRef!: any;
-  @type.Getter
+  @category.Getter
+  categories!: Category[];
+  @category.Getter
+  modalFormCategoryRef!: any;
+  @category.Getter
   searchMode!: boolean;
 
-  @type.Action
-  loadTypes!: () => Promise<void>;
+  @category.Action
+  loadCategories!: () => Promise<void>;
   /******************* End - Vuex *******************/
-  openModalFormType(type: TypeModel) {
-    this.modalFormTypeRef.open(type);
+  openModalFormCategory(category: Category) {
+    this.modalFormCategoryRef.open(category);
   }
 
-  openModalChangeStatus(type: TypeModel): void {
+  openModalChangeStatus(category: Category): void {
     this.modalChangeStatusRef = this.$refs['custom-modal-change-status'] as Vue & {
       open: (value: string, name: string, status: boolean) => void;
       close: () => void;
       setLoading: (value: boolean) => void;
     };
-    this.type = type;
-    this.modalChangeStatusRef.open('el tipo', type.denomination, type.state);
-  }
-
-  redirectCategories(type: TypeModel): void {
-    this.$router.push({ path: `/admin/types/${type.id}/categories` });
+    this.category = category;
+    this.modalChangeStatusRef.open('el tipo', category.denomination, category.state);
   }
 
   /*  changeStatus(): void {
@@ -142,7 +128,7 @@ export default class TypesTable extends Mixins(FormatMixin) {
           this.modalChangeStatusRef.close();
           this.type = null;
           this.modalChangeStatusRef = null;
-          this.loadTypes();
+          this.loadCategories();
         })
         .catch(err => {
           this.modalChangeStatusRef.setLoading(false);
