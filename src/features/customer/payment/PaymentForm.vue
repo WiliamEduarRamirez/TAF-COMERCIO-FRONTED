@@ -78,13 +78,7 @@
             </form>
             <v-row>
               <v-col cols="12">
-                <v-btn
-                  @click="paymentCulqi"
-                  style="width: 100%"
-                  color="primary"
-                >
-                  Pagar
-                </v-btn>
+                <v-btn @click="paymentCulqi" style="width: 100%" color="primary"> Pagar </v-btn>
               </v-col>
             </v-row>
           </v-card-text>
@@ -105,7 +99,7 @@
               <v-col cols="12">
                 <div class="d-flex justify-space-between">
                   <h3>Descuento:</h3>
-                  <h3>S/. {{ "0" }}</h3>
+                  <h3>S/. {{ '0' }}</h3>
                 </div>
               </v-col>
             </v-row>
@@ -253,9 +247,7 @@
                   <!--                  <button type="submit" id="form-checkout__submit">Pagar</button>-->
                 </v-col>
                 <v-col cols="6">
-                  <progress value="0" class="progress-bar">
-                    Cargando...
-                  </progress>
+                  <progress value="0" class="progress-bar">Cargando...</progress>
                 </v-col>
               </v-row>
             </v-card-actions>
@@ -267,16 +259,17 @@
 </template>
 
 <script lang="ts">
-import { Component } from "vue-property-decorator";
-import { namespace } from "vuex-class";
-import { MercadoPagoPayment } from "@/app/models/payment";
-import paymentsServices from "@/app/services/payments.services";
-import { User } from "@/app/models/user";
-import sleep from "@/app/common/functions/sleep";
-import Formats from "@/app/common/mixins/formats";
+import { Component, Mixins } from 'vue-property-decorator';
+import { namespace } from 'vuex-class';
+import { MercadoPagoPayment } from '@/app/models/payment';
+import paymentsServices from '@/app/services/payments.services';
+import { User } from '@/app/models/user';
+import sleep from '@/app/common/functions/sleep';
 import { PUBLIC_KEY_CULQI, PUBLIC_KEY_MERCADO_PAGO } from '@/app/common/constants/constants.app';
-const shoppingCart = namespace("shoppingCart");
-const user = namespace("user");
+import FormatMixin from '@/app/common/mixins/formatMixin';
+import FormValidationMixin from '@/app/common/mixins/formValidationMixin';
+const shoppingCart = namespace('shoppingCart');
+const user = namespace('user');
 
 declare global {
   interface Window {
@@ -286,23 +279,23 @@ declare global {
 }
 
 @Component
-export default class PaymentForm extends Formats {
+export default class PaymentForm extends Mixins(FormatMixin, FormValidationMixin) {
   form = {
-    email: "",
-    docType: "DNI",
-    docNumber: "73062536",
-    cardName: "Visa",
-    cardNumber: "3",
-    cardholderName: "",
-    cardExpirationMonth: "11",
-    cardExpirationYear: "25",
-    securityCode: "123",
-    issuer: "",
-    installments: "",
-    postalCode: "05001",
-    paymentMethodId: "visa",
+    email: '',
+    docType: 'DNI',
+    docNumber: '73062536',
+    cardName: 'Visa',
+    cardNumber: '3',
+    cardholderName: '',
+    cardExpirationMonth: '11',
+    cardExpirationYear: '25',
+    securityCode: '123',
+    issuer: '',
+    installments: '',
+    postalCode: '05001',
+    paymentMethodId: 'visa',
     transactionAmount: 1500,
-    description: "Alguna descripcion",
+    description: 'Alguna descripcion'
   };
   cardForm: any = null;
   loading = false;
@@ -324,7 +317,7 @@ export default class PaymentForm extends Formats {
   }
   created(): void {
     if (!this.user) {
-      this.$router.push({ name: "home" });
+      this.$router.push({ name: 'home' });
     }
   }
   /*  mounted(): void {
@@ -341,63 +334,61 @@ export default class PaymentForm extends Formats {
       amount: this.formatDecimal(this.totalPrice),
       autoMount: true,
       form: {
-        id: "form-checkout",
+        id: 'form-checkout',
         cardholderName: {
-          id: "form-checkout__cardholderName",
-          placeholder: "Titular de la tarjeta",
+          id: 'form-checkout__cardholderName',
+          placeholder: 'Titular de la tarjeta'
         },
         cardholderEmail: {
-          id: "form-checkout__cardholderEmail",
-          placeholder: "E-mail",
+          id: 'form-checkout__cardholderEmail',
+          placeholder: 'E-mail'
         },
         cardNumber: {
-          id: "form-checkout__cardNumber",
-          placeholder: "Número de la tarjeta",
+          id: 'form-checkout__cardNumber',
+          placeholder: 'Número de la tarjeta'
         },
         cardExpirationMonth: {
-          id: "form-checkout__cardExpirationMonth",
-          placeholder: "Mes de vencimiento",
+          id: 'form-checkout__cardExpirationMonth',
+          placeholder: 'Mes de vencimiento'
         },
         cardExpirationYear: {
-          id: "form-checkout__cardExpirationYear",
-          placeholder: "Año de vencimiento",
+          id: 'form-checkout__cardExpirationYear',
+          placeholder: 'Año de vencimiento'
         },
         securityCode: {
-          id: "form-checkout__securityCode",
-          placeholder: "Código de seguridad",
+          id: 'form-checkout__securityCode',
+          placeholder: 'Código de seguridad'
         },
         installments: {
-          id: "form-checkout__installments",
-          placeholder: "Cuotas",
+          id: 'form-checkout__installments',
+          placeholder: 'Cuotas'
         },
         identificationType: {
-          id: "form-checkout__identificationType",
-          placeholder: "Tipo de documento",
+          id: 'form-checkout__identificationType',
+          placeholder: 'Tipo de documento'
         },
         identificationNumber: {
-          id: "form-checkout__identificationNumber",
-          placeholder: "Número de documento",
+          id: 'form-checkout__identificationNumber',
+          placeholder: 'Número de documento'
         },
         issuer: {
-          id: "form-checkout__issuer",
-          placeholder: "Banco emisor",
-        },
+          id: 'form-checkout__issuer',
+          placeholder: 'Banco emisor'
+        }
       },
       callbacks: {
         onFormMounted: (error: any) => {
-          if (error)
-            return console.warn("Form Mounted handling error: ", error);
+          if (error) return console.warn('Form Mounted handling error: ', error);
         },
         onFormUnmounted: (error: any) => {
-          if (error)
-            return console.warn("Form Unmounted handling error: ", error);
+          if (error) return console.warn('Form Unmounted handling error: ', error);
         },
         onCardTokenReceived: (error: any[], token: any) => {
           if (error) {
-            console.warn("Token handling error test: ", error);
+            console.warn('Token handling error test: ', error);
             return;
           }
-          console.log("Token available: ", token);
+          console.log('Token available: ', token);
         },
         onSubmit: (event: any) => {
           event.preventDefault();
@@ -410,11 +401,11 @@ export default class PaymentForm extends Formats {
             token,
             installments,
             identificationNumber,
-            identificationType,
+            identificationType
           } = this.cardForm.getCardFormData();
 
           const processPayment: MercadoPagoPayment = {
-            description: "Descripción del producto",
+            description: 'Descripción del producto',
             docNumber: identificationNumber,
             docType: identificationType,
             email: email,
@@ -422,25 +413,25 @@ export default class PaymentForm extends Formats {
             installments: Number(installments),
             issuerId: issuer_id,
             token: token,
-            transactionAmount: Number(amount),
+            transactionAmount: Number(amount)
           };
 
           paymentsServices.create(processPayment).then(() => {
             this.loading = false;
-            this.$router.push({ name: "home" });
-            this.$toast("Su compra se realizo correctamente");
+            this.$router.push({ name: 'home' });
+            this.$toast('Su compra se realizo correctamente');
             this.resetShoppingCartItems();
           });
         },
         onFetching: () => {
           // Animate progress bar
-          const progressBar = document.querySelector(".progress-bar");
-          progressBar!.removeAttribute("value");
+          const progressBar = document.querySelector('.progress-bar');
+          progressBar!.removeAttribute('value');
           return () => {
-            progressBar!.setAttribute("value", "0");
+            progressBar!.setAttribute('value', '0');
           };
-        },
-      },
+        }
+      }
     });
   }
   async paymentV2Culqi(): Promise<void> {
@@ -449,33 +440,33 @@ export default class PaymentForm extends Formats {
       await window.Culqi.createToken();
       await sleep(2000);
       console.log(window.Culqi.token);
-      if (window.Culqi.token.object === "error") {
+      if (window.Culqi.token.object === 'error') {
         console.log(window.Culqi.token);
         return;
       }
       if (window.Culqi.token) {
         var token = window.Culqi.token.id;
-        alert("Se ha creado un token:" + token);
+        alert('Se ha creado un token:' + token);
       } else {
         console.log(window.Culqi.error);
         alert(window.Culqi.error.user_message);
       }
     } catch (e) {
-      console.log("entra aqui");
+      console.log('entra aqui');
       console.log(e);
     } finally {
       this.loadingCulqi = false;
     }
   }
   paymentCulqi(): void {
-    window.Culqi.publicKey = "pk_test_17595c69457ccd97";
+    window.Culqi.publicKey = 'pk_test_17595c69457ccd97';
     const amountDecimal = this.formatDecimal(this.totalPrice) as string;
-    const amount = parseInt(amountDecimal.split(".").join(""));
+    const amount = parseInt(amountDecimal.split('.').join(''));
     window.Culqi.settings({
-      title: "Eccomerce",
-      currency: "PEN",
-      description: "Utiliza Culqi",
-      amount: amount,
+      title: 'Eccomerce',
+      currency: 'PEN',
+      description: 'Utiliza Culqi',
+      amount: amount
     });
     window.Culqi.open();
   }

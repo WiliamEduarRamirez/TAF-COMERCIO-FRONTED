@@ -15,12 +15,6 @@ const options = {
 };
 Vue.use(Toast, options);
 
-import mixinFormat from '@/app/common/mixins/formats';
-import mixinFormatValidation from '@/app/common/mixins/form-validation';
-
-Vue.mixin(mixinFormat);
-Vue.mixin(mixinFormatValidation);
-
 new Vue({
   router,
   store,

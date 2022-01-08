@@ -104,7 +104,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Mixins, Vue } from 'vue-property-decorator';
 import CustomBodyTable from '@/app/common/components/custom-body-table/CustomBodyTable.vue';
 import { Product } from '@/app/models/product';
 import { namespace } from 'vuex-class';
@@ -112,6 +112,7 @@ import CustomProgressCircular from '@/app/common/components/custom-progress-circ
 import ModalAddPhoto from '@/features/admin/products/modals/ModalAddPhoto.vue';
 import CustomMessage from '@/app/common/components/custom-messages/CustomMessage.vue';
 import ModalChangeProductStatus from '@/features/admin/products/modals/ModalChangeProductStatus.vue';
+import FormatMixin from '@/app/common/mixins/formatMixin';
 const product = namespace('product');
 @Component({
   components: {
@@ -122,7 +123,7 @@ const product = namespace('product');
     CustomBodyTable
   }
 })
-export default class ProductsList extends Vue {
+export default class ProductsList extends Mixins(FormatMixin) {
   @product.Getter
   getInitialLoading!: boolean;
 

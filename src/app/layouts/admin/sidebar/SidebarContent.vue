@@ -64,38 +64,38 @@ export default class SidebarContent extends Vue {
     {
       text: 'Dashboard',
       icon: 'mdi-map-marker-radius',
-      href: '/admin/dashboard',
+      href: '/admin/dashboard'
     },
     {
       text: 'Productos',
       icon: 'mdi-clipboard-list',
-      href: '/admin/products',
+      href: '/admin/products'
     },
-    {
+    /*    {
       text: 'Categorias',
       icon: 'mdi-file-document',
       href: '/dashboard/reports',
-    },
+    },*/
     {
       text: 'Tipos',
       icon: 'mdi-file-document',
-      href: '/dashboard/reports',
+      href: '/admin/types'
     },
     {
       text: 'Usuarios',
       icon: 'mdi-account',
-      href: '/dashboard/users',
+      href: '/dashboard/users'
     },
     {
       text: 'Proveedores',
       icon: 'mdi-briefcase-plus',
-      href: '/dashboard/providers',
+      href: '/dashboard/providers'
     },
     {
       text: 'Reportes',
       icon: 'mdi-file-document',
-      href: '/dashboard/reports',
-    },
+      href: '/dashboard/reports'
+    }
   ];
 }
 </script>

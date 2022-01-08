@@ -16,12 +16,12 @@
 import { Component, Vue } from 'vue-property-decorator';
 import HomeComponent from '@/features/customer/home/HomeComponent.vue';
 import { namespace } from 'vuex-class';
-import { Type } from '@/app/models/product';
 import { PagingParams, PredicateParams } from '@/app/models/pagination';
+import { TypeModel } from '@/app/models/type';
 const type = namespace('type');
 const product = namespace('product');
 @Component({
-  components: { HomeComponent },
+  components: { HomeComponent }
 })
 export default class Home extends Vue {
   loading = false;
@@ -34,7 +34,7 @@ export default class Home extends Vue {
   setPagingParams!: (pagingParams: PagingParams) => void;
 
   @type.Getter
-  types!: Type[];
+  types!: TypeModel[];
 
   @type.Action
   loadTypes!: () => Promise<void>;
@@ -47,7 +47,7 @@ export default class Home extends Vue {
       await this.loadTypes();
       const predicateParams: PredicateParams = {
         predicate: 'isEnable',
-        value: true,
+        value: true
       };
       this.setPredicate(predicateParams);
       await this.loadProducts();

@@ -20,13 +20,13 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import { Type } from '@/app/models/product';
 import { namespace } from 'vuex-class';
+import { TypeModel } from '@/app/models/type';
 const type = namespace('type');
 @Component
 export default class MainTypesList extends Vue {
   @type.Getter
-  types!: Type[];
+  types!: TypeModel[];
 }
 </script>
 

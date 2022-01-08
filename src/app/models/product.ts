@@ -1,3 +1,5 @@
+import { TypeModel } from '@/app/models/type';
+
 export interface Product {
   id: string;
   categoryId: string;
@@ -12,17 +14,8 @@ export interface Product {
   photoUrl: string | null;
   createdAt: string;
   updatedAt: string;
-  type: Type;
+  type: TypeModel;
   category: Category;
-}
-
-export interface Type {
-  id: string;
-  denomination: string;
-  description: string;
-  state: boolean;
-  createdAt: string;
-  updatedAt: string;
 }
 
 export interface Category {

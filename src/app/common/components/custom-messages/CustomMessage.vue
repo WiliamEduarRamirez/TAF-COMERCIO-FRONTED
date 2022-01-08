@@ -1,9 +1,12 @@
 <template>
   <div class="text-center">
-    <span class="group pa-2">
+    <span class="group pa-1">
       <v-icon x-large>info</v-icon>
     </span>
-    <div class="ml-7 mt-2 text-h5 font-weight-light">{{ message }}</div>
+    <div class="mb-2 text-h5 font-weight-light">{{ message }}</div>
+    <div>
+      <slot></slot>
+    </div>
   </div>
 </template>
 

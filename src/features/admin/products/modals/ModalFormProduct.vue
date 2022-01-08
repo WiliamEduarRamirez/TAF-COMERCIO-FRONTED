@@ -111,12 +111,14 @@
 </template>
 
 <script lang="ts">
-import { Component, Emit, Vue } from 'vue-property-decorator';
+import { Component, Emit, Mixins, Vue } from 'vue-property-decorator';
 import CustomDropzone from '@/app/common/components/custom-dropzone/CustomDropzone.vue';
 import { Product, ProductFormValues } from '@/app/models/product';
 import categoriesServices from '@/app/services/categories.services';
 import typesServices from '@/app/services/types.services';
 import productsServices from '@/app/services/products.services';
+import { PagingParams } from '@/app/models/pagination';
+import FormValidationMixin from '@/app/common/mixins/formValidationMixin';
 
 interface Item {
   text: string;
@@ -124,9 +126,9 @@ interface Item {
 }
 
 @Component({
-  components: { CustomDropzone },
+  components: { CustomDropzone }
 })
-export default class ProductsList extends Vue {
+export default class ProductsList extends Mixins(FormValidationMixin) {
   loading = false;
   valid = true;
   dialog = false;
@@ -151,7 +153,7 @@ export default class ProductsList extends Vue {
         ...this.productFormValues,
         ...product,
         categoryId: product.category.id,
-        typeId: product.type.id,
+        typeId: product.type.id
       };
       this.productFormValues = new ProductFormValues(productForm as ProductFormValues);
       this.listCategories(this.productFormValues.typeId);
@@ -171,7 +173,7 @@ export default class ProductsList extends Vue {
 
   addProduct(): void {
     /*delete this.productFormValues.state;*/
-    productsServices.add(this.productFormValues).then((res) => {
+    productsServices.add(this.productFormValues).then(res => {
       this.loading = false;
       this.$toast.success('Producto agregado correctamente');
       this.successful(res);
@@ -198,8 +200,8 @@ export default class ProductsList extends Vue {
     this.loadingCategories = true;
     categoriesServices
       .list(typeId)
-      .then((res) => {
-        this.categoriesItems = res.map((x) => ({ text: x.denomination, value: x.id }));
+      .then(res => {
+        this.categoriesItems = res.map(x => ({ text: x.denomination, value: x.id }));
       })
       .finally(() => {
         this.loadingCategories = false;
@@ -207,10 +209,15 @@ export default class ProductsList extends Vue {
   }
   listTypes(): void {
     this.loadingTypes = true;
+    const pagingParams = new PagingParams(1, 25);
+    const params = new URLSearchParams();
+    params.append('pageNumber', pagingParams.pageNumber.toString());
+    params.append('pageSize', pagingParams.pageSize.toString());
+    params.append('isEnable', 'true');
     typesServices
-      .list()
-      .then((res) => {
-        this.typesItems = res.map((x) => ({ text: x.denomination, value: x.id }));
+      .list(params)
+      .then(res => {
+        this.typesItems = res.data.map(x => ({ text: x.denomination, value: x.id }));
       })
       .finally(() => {
         this.loadingTypes = false;

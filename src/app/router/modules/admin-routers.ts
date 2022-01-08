@@ -31,6 +31,16 @@ const adminRouters: Array<RouteConfig> = [
       requiresAuth: true,
       authorize: [ROLE_ADMIN]
     }
+  },
+  {
+    path: 'types',
+    component: () => import('@/app/views/admin/types-view/TypesView.vue'),
+    name: 'types',
+    meta: {
+      nameComponent: 'Tipos',
+      requiresAuth: true,
+      authorize: [ROLE_ADMIN]
+    }
   }
 ];
 export default adminRouters;
