@@ -53,12 +53,13 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Mixins, Prop } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
 import { CartItem } from '@/app/models/shopping-cart';
+import FormatMixin from '@/app/common/mixins/formatMixin';
 const shoppingCart = namespace('shoppingCart');
 @Component
-export default class DrawerRightContent extends Vue {
+export default class DrawerRightContent extends Mixins(FormatMixin) {
   @Prop({ required: true }) readonly handleDrawerRight!: () => void;
   @shoppingCart.Getter
   totalItems!: number;

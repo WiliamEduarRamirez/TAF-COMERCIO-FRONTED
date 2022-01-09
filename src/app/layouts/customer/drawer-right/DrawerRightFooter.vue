@@ -8,14 +8,15 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Mixins } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
 import { User } from '@/app/models/user';
+import FormatMixin from '@/app/common/mixins/formatMixin';
 const shoppingCart = namespace('shoppingCart');
 const user = namespace('user');
 
 @Component
-export default class DrawerRightFooter extends Vue {
+export default class DrawerRightFooter extends Mixins(FormatMixin) {
   @shoppingCart.Getter
   totalPrice!: number;
 

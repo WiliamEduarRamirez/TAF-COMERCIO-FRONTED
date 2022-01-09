@@ -16,7 +16,7 @@
         <v-row v-if="$route.name === 'home'" class="my-3">
           <v-col cols="6" sm="12" md="6"> </v-col>
           <v-col cols="6" sm="12" md="6">
-            <v-row>
+            <!--            <v-row>
               <div class="text-center">
                 <v-menu open-on-hover offset-y>
                   <template v-slot:activator="{ on, attrs }">
@@ -55,7 +55,7 @@
                   </v-list>
                 </v-menu>
               </div>
-            </v-row>
+            </v-row>-->
           </v-col>
         </v-row>
         <v-row>
@@ -110,8 +110,8 @@ const shoppingCart = namespace('shoppingCart');
     DrawerRightFooter,
     DrawerRightHeader,
     NavbarCustomerContent,
-    DrawerRightContent,
-  },
+    DrawerRightContent
+  }
 })
 export default class CustomerLayout extends Vue {
   drawerRight = false;
@@ -119,7 +119,7 @@ export default class CustomerLayout extends Vue {
     { title: 'Click Me' },
     { title: 'Click Me' },
     { title: 'Click Me' },
-    { title: 'Click Me 2' },
+    { title: 'Click Me 2' }
   ];
   drawer = false;
   handleDrawerRight(): void {

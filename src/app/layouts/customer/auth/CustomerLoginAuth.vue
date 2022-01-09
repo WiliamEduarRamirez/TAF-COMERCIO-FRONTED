@@ -111,7 +111,7 @@ const auth = namespace('auth');
 const valueForm: UserFormValues = {
   email: 'wiliam@gmail.com',
   password: 'P@ssword1998',
-  isCustomer: true,
+  isCustomer: true
 };
 
 @Component
@@ -122,8 +122,8 @@ export default class CustomerLoginAuth extends Vue {
     required: (v: string): any => !!v || 'La contraseña es requerida',
     email: [
       (v: string): any => !!v || 'Correo electrónico es requerido',
-      (v: string): any => REGEX_VALID_EMAIL.test(v) || 'Formato de correo electrónico no válido',
-    ],
+      (v: string): any => REGEX_VALID_EMAIL.test(v) || 'Formato de correo electrónico no válido'
+    ]
   };
   form = { ...valueForm };
   showPassword = false;
@@ -132,6 +132,8 @@ export default class CustomerLoginAuth extends Vue {
     this.form = { ...valueForm };
     this.form.email = email || this.form.email;
   }*/
+  /*  @user.Mutation
+  setUser!: (user: User | null) => void;*/
 
   @auth.Action
   login!: (creds: UserFormValues) => Promise<void>;

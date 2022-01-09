@@ -3,120 +3,6 @@
     <v-row>
       <v-col cols="12" sm="12" md="8">
         <v-card>
-          <v-card-title> Culqi </v-card-title>
-          <v-divider></v-divider>
-
-          <v-card-text>
-            <form>
-              <v-row>
-                <v-col cols="12">
-                  <v-text-field
-                    type="text"
-                    dense
-                    label="Número de tarjeta"
-                    data-culqi="card[number]"
-                    id="card[number]"
-                    outlined
-                    hide-details="auto"
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="12">
-                  <v-text-field
-                    type="text"
-                    dense
-                    label="Correo Electrónico"
-                    data-culqi="card[email]"
-                    id="card[email]"
-                    outlined
-                    hide-details="auto"
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="3">
-                  <v-text-field
-                    type="text"
-                    dense
-                    label="MM"
-                    ddata-culqi="card[exp_month]"
-                    id="card[exp_month]"
-                    outlined
-                    hide-details="auto"
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="3">
-                  <v-text-field
-                    type="text"
-                    dense
-                    label="YYYY"
-                    data-culqi="card[exp_year]"
-                    id="card[exp_year]"
-                    outlined
-                    hide-details="auto"
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="6">
-                  <v-text-field
-                    type="text"
-                    dense
-                    label="CVV"
-                    data-culqi="card[cvv]"
-                    id="card[cvv]"
-                    outlined
-                    hide-details="auto"
-                  ></v-text-field>
-                </v-col>
-                <!--                <v-col cols="12">
-                  <v-btn
-                    :loading="loadingCulqi"
-                    @click="paymentV2Culqi"
-                    style="width: 100%"
-                    color="primary"
-                  >
-                    Pagar
-                  </v-btn>
-                </v-col>-->
-              </v-row>
-            </form>
-            <v-row>
-              <v-col cols="12">
-                <v-btn @click="paymentCulqi" style="width: 100%" color="primary"> Pagar </v-btn>
-              </v-col>
-            </v-row>
-          </v-card-text>
-        </v-card>
-      </v-col>
-      <v-col cols="12" sm="12" md="4">
-        <v-card>
-          <v-card-title> Resumen </v-card-title>
-          <v-divider></v-divider>
-          <v-card-text>
-            <v-row>
-              <v-col cols="12">
-                <div class="d-flex justify-space-between">
-                  <h3>Subtotal:</h3>
-                  <h3>S/. {{ formatDecimal(totalPrice) }}</h3>
-                </div>
-              </v-col>
-              <v-col cols="12">
-                <div class="d-flex justify-space-between">
-                  <h3>Descuento:</h3>
-                  <h3>S/. {{ '0' }}</h3>
-                </div>
-              </v-col>
-            </v-row>
-          </v-card-text>
-          <v-divider class=""></v-divider>
-          <v-card-actions>
-            <div style="width: 100%" class="d-flex justify-space-between my-3">
-              <h2>Total:</h2>
-              <h2>S/. {{ formatDecimal(totalPrice) }}</h2>
-            </div>
-          </v-card-actions>
-        </v-card>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col cols="12" sm="12" md="8">
-        <v-card>
           <form id="form-checkout">
             <v-card-title>
               <v-row>
@@ -252,6 +138,120 @@
               </v-row>
             </v-card-actions>
           </form>
+        </v-card>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="12" sm="12" md="8">
+        <v-card>
+          <v-card-title> Culqi </v-card-title>
+          <v-divider></v-divider>
+
+          <v-card-text>
+            <form>
+              <v-row>
+                <v-col cols="12">
+                  <v-text-field
+                    type="text"
+                    dense
+                    label="Número de tarjeta"
+                    data-culqi="card[number]"
+                    id="card[number]"
+                    outlined
+                    hide-details="auto"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12">
+                  <v-text-field
+                    type="text"
+                    dense
+                    label="Correo Electrónico"
+                    data-culqi="card[email]"
+                    id="card[email]"
+                    outlined
+                    hide-details="auto"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="3">
+                  <v-text-field
+                    type="text"
+                    dense
+                    label="MM"
+                    ddata-culqi="card[exp_month]"
+                    id="card[exp_month]"
+                    outlined
+                    hide-details="auto"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="3">
+                  <v-text-field
+                    type="text"
+                    dense
+                    label="YYYY"
+                    data-culqi="card[exp_year]"
+                    id="card[exp_year]"
+                    outlined
+                    hide-details="auto"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="6">
+                  <v-text-field
+                    type="text"
+                    dense
+                    label="CVV"
+                    data-culqi="card[cvv]"
+                    id="card[cvv]"
+                    outlined
+                    hide-details="auto"
+                  ></v-text-field>
+                </v-col>
+                <!--                <v-col cols="12">
+                  <v-btn
+                    :loading="loadingCulqi"
+                    @click="paymentV2Culqi"
+                    style="width: 100%"
+                    color="primary"
+                  >
+                    Pagar
+                  </v-btn>
+                </v-col>-->
+              </v-row>
+            </form>
+            <v-row>
+              <v-col cols="12">
+                <v-btn @click="paymentCulqi" style="width: 100%" color="primary"> Pagar </v-btn>
+              </v-col>
+            </v-row>
+          </v-card-text>
+        </v-card>
+      </v-col>
+      <v-col cols="12" sm="12" md="4">
+        <v-card>
+          <v-card-title> Resumen </v-card-title>
+          <v-divider></v-divider>
+          <v-card-text>
+            <v-row>
+              <v-col cols="12">
+                <div class="d-flex justify-space-between">
+                  <h3>Subtotal:</h3>
+                  <h3>S/. {{ formatDecimal(totalPrice) }}</h3>
+                </div>
+              </v-col>
+              <v-col cols="12">
+                <div class="d-flex justify-space-between">
+                  <h3>Descuento:</h3>
+                  <h3>S/. {{ '0' }}</h3>
+                </div>
+              </v-col>
+            </v-row>
+          </v-card-text>
+          <v-divider class=""></v-divider>
+          <v-card-actions>
+            <div style="width: 100%" class="d-flex justify-space-between my-3">
+              <h2>Total:</h2>
+              <h2>S/. {{ formatDecimal(totalPrice) }}</h2>
+            </div>
+          </v-card-actions>
         </v-card>
       </v-col>
     </v-row>

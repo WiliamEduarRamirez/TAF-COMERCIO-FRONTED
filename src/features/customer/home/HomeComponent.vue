@@ -3,7 +3,7 @@
     <v-col class="mt-3" v-if="$vuetify.breakpoint.mdAndUp" cols="2">
       <home-types-list></home-types-list>
     </v-col>
-    <v-col class="mt-n12">
+    <v-col cols="10" class="mt-n12">
       <v-container fluid>
         <v-row>
           <v-col v-for="tempProduct in products" :key="tempProduct.id" cols="12" sm="6" md="4">
@@ -24,7 +24,7 @@ import HomeTypesList from './HomeTypesList.vue';
 
 const product = namespace('product');
 @Component({
-  components: { HomeTypesList, CardProduct },
+  components: { HomeTypesList, CardProduct }
 })
 export default class HomeComponent extends Vue {
   @product.Getter

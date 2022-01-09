@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
-/*import sleep from '@/app/common/functions/sleep';*/
+import sleep from '@/app/common/functions/sleep';
 import store from '@/app/store';
 import { PaginatedResult } from '@/app/models/pagination';
 import { BASE_URL } from '@/app/common/constants/constants.app';
@@ -22,7 +22,7 @@ axios.interceptors.request.use(config => {
 
 axios.interceptors.response.use(
   async response => {
-    /*await sleep(2000);*/
+    await sleep(1000);
     const pagination = response.headers['pagination'];
     if (pagination) {
       response.data = new PaginatedResult(response.data, JSON.parse(pagination));

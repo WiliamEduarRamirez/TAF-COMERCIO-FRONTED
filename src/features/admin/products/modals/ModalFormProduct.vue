@@ -119,6 +119,7 @@ import typesServices from '@/app/services/types.services';
 import productsServices from '@/app/services/products.services';
 import { PagingParams } from '@/app/models/pagination';
 import FormValidationMixin from '@/app/common/mixins/formValidationMixin';
+import categoriesServices from '@/app/services/categories.services';
 
 interface Item {
   text: string;
@@ -156,7 +157,7 @@ export default class ProductsList extends Mixins(FormValidationMixin) {
         typeId: product.type.id
       };
       this.productFormValues = new ProductFormValues(productForm as ProductFormValues);
-      /* this.listCategories(this.productFormValues.typeId);*/
+      this.listCategories(this.productFormValues.typeId);
     }
   }
 
@@ -172,7 +173,7 @@ export default class ProductsList extends Mixins(FormValidationMixin) {
   }
 
   addProduct(): void {
-    /*delete this.productFormValues.state;*/
+    delete this.productFormValues.state;
     productsServices.add(this.productFormValues).then(res => {
       this.loading = false;
       this.$toast.success('Producto agregado correctamente');
@@ -184,7 +185,7 @@ export default class ProductsList extends Mixins(FormValidationMixin) {
   onChangeType(): void {
     this.categoriesItems = [];
     this.productFormValues.categoryId = '';
-    /*  this.listCategories(this.productFormValues.typeId);*/
+    this.listCategories(this.productFormValues.typeId);
   }
 
   editProduct(): void {
@@ -196,16 +197,21 @@ export default class ProductsList extends Mixins(FormValidationMixin) {
     });
   }
 
-  listCategories(): void {
+  listCategories(typeId: string): void {
     this.loadingCategories = true;
-    /*categoriesServices
-      .list(typeId)
+    const pagingParams = new PagingParams(1, 25);
+    const params = new URLSearchParams();
+    params.append('pageNumber', pagingParams.pageNumber.toString());
+    params.append('pageSize', pagingParams.pageSize.toString());
+    params.append('typeId', typeId);
+    categoriesServices
+      .list(params)
       .then(res => {
-        this.categoriesItems = res.map(x => ({ text: x.denomination, value: x.id }));
+        this.categoriesItems = res.data.map(x => ({ text: x.denomination, value: x.id }));
       })
       .finally(() => {
         this.loadingCategories = false;
-      });*/
+      });
   }
   listTypes(): void {
     this.loadingTypes = true;

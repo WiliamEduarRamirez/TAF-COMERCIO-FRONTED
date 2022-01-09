@@ -48,14 +48,15 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Mixins, Prop } from 'vue-property-decorator';
 import { Product } from '@/app/models/product';
 import { namespace } from 'vuex-class';
+import FormatMixin from '@/app/common/mixins/formatMixin';
 
 const shoppingCart = namespace('shoppingCart');
 
 @Component
-export default class CardProduct extends Vue {
+export default class CardProduct extends Mixins(FormatMixin) {
   @Prop({ required: true }) readonly product!: Product;
   @shoppingCart.Action
   addItemsOnStart!: (product: Product) => void;
